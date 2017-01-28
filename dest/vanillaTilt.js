@@ -1,6 +1,8 @@
 /**
  * Created by micku7zu on 1/27/2017.
+ * Original idea: http://gijsroge.github.io/tilt.js/
  * MIT License.
+ * Version 1.0.0
  */
 "use strict";
 (function (undefined) {
@@ -77,6 +79,11 @@
 
         reset() {
             requestAnimationFrame(() => {
+                this.event = {
+                    pageX: this.left + this.width / 2,
+                    pageY: this.top + this.height / 2
+                };
+
                 this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
                     "rotateX(0deg) " +
                     "rotateY(0deg) " +
@@ -84,7 +91,7 @@
             });
         }
 
-        update() {
+        getValues() {
             let x = (this.event.pageX - this.left) / this.width;
             let y = (this.event.pageY - this.top) / this.height;
 
@@ -94,10 +101,26 @@
             let tiltX = (this.settings.max / 2 - x * this.settings.max).toFixed(2);
             let tiltY = (y * this.settings.max - this.settings.max / 2).toFixed(2);
 
+            return {
+                tiltX: tiltX,
+                tiltY: tiltY,
+                percentageX: x * 100,
+                percentageY: y * 100
+            };
+        }
+
+        update() {
+            let values = this.getValues();
+
             this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
-                "rotateX(" + (this.settings.axis === "x" ? 0 : tiltY) + "deg) " +
-                "rotateY(" + (this.settings.axis === "y" ? 0 : tiltX) + "deg) " +
+                "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
+                "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
                 "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
+
+
+            this.element.dispatchEvent(new CustomEvent("tiltChange", {
+                "detail": values
+            }));
 
             this.updateCall = null;
         }
@@ -126,7 +149,13 @@
                 if (property in settings) {
                     newSettings[property] = settings[property];
                 } else if (this.element.hasAttribute("data-tilt-" + property)) {
-                    newSettings[property] = this.element.getAttribute("data-tilt-" + property);
+                    let attribute = this.element.getAttribute("data-tilt-" + property);
+                    try {
+                        newSettings[property] = JSON.parse(attribute);
+                    } catch (e) {
+                        newSettings[property] = attribute;
+                    }
+
                 } else {
                     newSettings[property] = defaultSettings[property];
                 }
@@ -160,5 +189,5 @@
     /**
      * Auto load
      */
-    VanillaTilt.init(document.querySelectorAll(["data-tilt"]));
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
 })();

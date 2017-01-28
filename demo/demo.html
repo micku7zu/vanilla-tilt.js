@@ -1,9 +1,9 @@
-<!-- Copyright for Demo https://github.com/gijsroge/tilt.js -->
-<!doctype html>
+<!-- Demo Copyright goes to: https://github.com/gijsroge/tilt.js -->
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tilt</title>
+    <title>VanillaTilt.js</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
     <style>
@@ -88,26 +88,52 @@
 <body>
 
 <header>
-    <h1><span class="js-tilt">tilt</span><span class="js-tilt">.js</span></h1>
+    <h1><span class="js-tilt">vanillaTilt</span><span class="js-tilt">.js</span></h1>
     <p>
-        A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect for VanillaJS.
+        A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect rewritten without any dependencies.
+    </p>
+    <p>
+        It is forked, copied, inspired by <a href="https://github.com/gijsroge/tilt.js" title="Tilt.js">github.com/gijsroge/tilt.js</a>.
+        All Copyright goes to him.
     </p>
     <div class="js-parent">
         <div class="c-test js-tilt">
             <div class="c-test-inner"></div>
         </div>
+        <button class="js-destroy">destroy</button>
+        <button class="js-getvalue">getvalue</button>
+        <button class="js-reset">reset</button>
     </div>
 
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </header>
-<script src="vanillaTilt.js"></script>
+<script src="../dest/vanillaTilt.js"></script>
 <script>
     VanillaTilt.init(document.querySelectorAll(".js-tilt"), {
         speed: 400,
         max: 50,
-        perspective: 500,
-        scale: 1
+        perspective: 300
     });
+
+    var element = document.querySelector(".c-test");
+
+    document.querySelector(".js-destroy").addEventListener("click", function () {
+        element.vanillaTilt.destroy();
+    });
+
+    document.querySelector(".js-getvalue").addEventListener("click", function () {
+        console.log(element.vanillaTilt.getValues());
+    });
+
+    document.querySelector(".js-reset").addEventListener("click", function () {
+        element.vanillaTilt.reset();
+    });
+
+    /*
+     element.addEventListener("tiltChange", function (event) {
+     console.log(event.detail);
+     });
+     */
 </script>
 </body>
 </html>
