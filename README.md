@@ -5,7 +5,7 @@ Rewritten from [Tilt.js](https://github.com/gijsroge/tilt.js).
 A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect without any dependencies.
 ![Tilt.js demo gif](http://gijsroge.github.io/tilt.js/tilt.js.gif)
 
-####Take a look at the **[landing page](http://micku7zu.github.io/vanillaTilt.js/)** for demo's.
+####Take a look at the **[landing page](https://micku7zu.github.io/vanillaTilt.js/index.html)** for demo's.
 
 ### Usage
 
