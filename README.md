@@ -1,11 +1,11 @@
-# vanillaTilt.js. Tilt.js without jQuery.
+# vanilla-tilt.js
 Rewritten from [Tilt.js](https://github.com/gijsroge/tilt.js).
 **All copyright goes to [https://github.com/gijsroge/tilt.js](https://github.com/gijsroge/tilt.js)**
 
 A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect without any dependencies.
 ![Tilt.js demo gif](http://gijsroge.github.io/tilt.js/tilt.js.gif)
 
-####Take a look at the **[landing page](https://micku7zu.github.io/vanillaTilt.js/index.html)** for demo's.
+####Take a look at the **[landing page](https://micku7zu.github.io/vanilla-tilt.js/index.html)** for demo's.
 
 ### Usage
 
@@ -13,7 +13,7 @@ A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect wit
 <!DOCTYPE html>
 <body>
     <div data-tilt></div> <!-- Tilt element -->
-    <script src="vanillaTilt.js"></script> <!-- Load vanillaTilt.js library -->
+    <script src="vanilla-tilt.js"></script> <!-- Load vanilla-tilt.js library -->
 </body>
 ```
 
@@ -54,9 +54,9 @@ element.vanillaTilt.reset();
 ### Install
 You can copy and include any of the following file:
 
-* dest/vanillaTilt.js ~ 6kb
-* dest/vanillaTilt.min.js ~ 3.5kb
-* dest/vanillaTilt.babel.js ~ 8.5kb
-* dest/vanillaTilt.babel.min.js ~ 4.3kb
+* dest/vanilla-tilt.js ~ 6kb
+* dest/vanilla-tilt.min.js ~ 3.5kb
+* dest/vanilla-tilt.babel.js ~ 8.5kb
+* dest/vanilla-tilt.babel.min.js ~ 4.3kb
 
 in your webiste.
