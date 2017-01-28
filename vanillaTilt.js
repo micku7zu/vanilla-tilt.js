@@ -71,18 +71,22 @@
             this.setTransition();
 
             if (this.settings.reset) {
-                requestAnimationFrame(() => {
-                    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
-                        "rotateX(0deg) " +
-                        "rotateY(0deg) " +
-                        "scale3d(1, 1, 1)";
-                });
+                this.reset();
             }
         }
 
+        reset() {
+            requestAnimationFrame(() => {
+                this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
+                    "rotateX(0deg) " +
+                    "rotateY(0deg) " +
+                    "scale3d(1, 1, 1)";
+            });
+        }
+
         update() {
-            let x = (this.event.clientX - this.left) / this.width;
-            let y = (this.event.clientY - this.top) / this.height;
+            let x = (this.event.pageX - this.left) / this.width;
+            let y = (this.event.pageY - this.top) / this.height;
 
             x = Math.min(Math.max(x, 0), 1);
             y = Math.min(Math.max(y, 0), 1);
@@ -119,7 +123,13 @@
             let newSettings = {};
 
             for (var property in defaultSettings) {
-                newSettings[property] = settings[property] || this.element.getAttribute("data-tilt-" + property) || defaultSettings[property];
+                if (property in settings) {
+                    newSettings[property] = settings[property];
+                } else if (this.element.hasAttribute("data-tilt-" + property)) {
+                    newSettings[property] = this.element.getAttribute("data-tilt-" + property);
+                } else {
+                    newSettings[property] = defaultSettings[property];
+                }
             }
 
             return newSettings;
