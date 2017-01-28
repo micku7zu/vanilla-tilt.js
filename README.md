@@ -54,9 +54,9 @@ element.vanillaTilt.reset();
 ### Install
 You can copy and include any of the following file:
 
-* dest/vanillaTilt.js
-* dest/vanillaTilt.min.js
-* dest/vanillaTilt.babel.js
-* dest/vanillaTilt.babel.min.js
+* dest/vanillaTilt.js ~ 6kb
+* dest/vanillaTilt.min.js ~ 3.5kb
+* dest/vanillaTilt.babel.js ~ 8.5kb
+* dest/vanillaTilt.babel.min.js ~ 4.3kb
 
 in your webiste.
