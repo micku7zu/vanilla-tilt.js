@@ -3027,13 +3027,10 @@ element.addEventListener("tiltChange", function(event){ console.log(event.detail
     var tiltOutput = document.querySelector(".js-tilt-output");
     var output = document.querySelector(".js-output");
 
-
     VanillaTilt.init(elements);
     VanillaTilt.init(tiltOutput);
 
-
     tiltOutput.addEventListener("tiltChange", function (event) {
-        console.log("TEST");
         var li = document.createElement("li");
         li.textContent = JSON.stringify(event.detail);
         output.insertBefore(li, output.firstChild);

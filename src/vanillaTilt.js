@@ -47,6 +47,8 @@
         destroy() {
             this.removeEventListeners();
             this.element.vanillaTilt = null;
+            delete this.element.vanillaTilt;
+
             this.element = null;
         }
 
@@ -178,7 +180,9 @@
             }
 
             elements.forEach((element) => {
-                element.vanillaTilt = new VanillaTilt(element, settings);
+                if (!("vanillaTilt" in element)) {
+                    element.vanillaTilt = new VanillaTilt(element, settings);
+                }
             });
         }
     }
