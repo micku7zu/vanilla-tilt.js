@@ -24,12 +24,15 @@ a {
 }
 
 aside {
+    flex-grow: 1;
+    flex-basis: 300px;
     text-align: center;
+    overflow-y: scroll;
+    padding: 50px;
 }
 
 main {
-    width: 100%;
-    height: 100%;
+    flex-grow: 2;
     border-left: 1px solid #ededed;
     overflow-y: auto;
 }
@@ -59,15 +62,13 @@ h3:first-child {
 
 .logo {
     display: block;
-    display: block;
-    margin: 100px;
 
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
 
-    line-height: 200px;
+    line-height: 300px;
     text-align: center;
-    vertical-align: middle;
 
     color: white;
     font-size: 36px;
@@ -75,11 +76,16 @@ h3:first-child {
     background: #0099F7; /* fallback for old browsers */
     background: -webkit-linear-gradient(135deg, #0099F7 , #F11712); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(135deg, #0099F7 , #F11712); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
+
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-transform: perspective(500px);
     transform: perspective(500px);
+}
+
+.mobileLogo {
+    display: none;
+    margin: 50px auto;
 }
 
 .logo > span {
@@ -153,8 +159,8 @@ h3:first-child {
 
 #logoJquery {
     margin-top: 0px;
-    width: 150px;
-    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
     margin: 0px auto;
     line-height: 150px;
 
@@ -188,6 +194,7 @@ aside h6 {
 
     color: #333333;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 
@@ -251,26 +258,21 @@ aside h6 {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: space-around;
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
 }
 
 .example .box {
-    width: 200px;
     height: 150px;
     background-color: red;
-    min-width: 200px;
+    width: 200px;
 }
 
 .example .info {
     font-size: 18px;
-    margin-left: 60px;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    -ms-flex-item-align: center;
-    align-self: center;
+    width: 70%;
 }
 
 .example li {
@@ -378,4 +380,42 @@ button {
 pre {
     background-color: #f8f8f8 !important;
     font-size: 16px !important;
+}
+
+@media only screen and (max-width: 1070px) {
+    .logo {
+        max-height: 200px;
+        line-height: 200px;
+    }
+    .logo span {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    aside {
+        display: none;
+    }
+    .logo span {
+        font-size: 40px;
+    }
+    .mobileLogo {
+        display: block;
+    }
+    .example {
+        flex-wrap: wrap;
+    }
+    .example .box {
+        margin-bottom: 20px;
+    }
+    .example .info {
+        width: 90%;
+    }
+    .downloadBox {
+        margin: 15px 0;
+        width: 100%;
+    }
+    .downloadBox:last-child {
+        margin-bottom: 30px;
+    }
 }
