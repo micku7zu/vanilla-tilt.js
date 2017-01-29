@@ -1,7 +1,7 @@
 # vanilla-tilt.js
 A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https://github.com/gijsroge/tilt.js).
 
-[View landing page (demos)](https://micku7zu.github.io/vanilla-tilt.js/landing/index.html)
+[View landing page (demos)](https://micku7zu.github.io/vanilla-tilt.js/)
 
 ### Usage
 
