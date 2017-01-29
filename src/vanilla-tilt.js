@@ -189,6 +189,7 @@ export default class VanillaTilt {
 }
 
 
-/*
-VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
- */
+if(typeof document !== 'undefined') {
+  window.VanillaTilt = VanillaTilt;
+  VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+}

@@ -34,7 +34,9 @@
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "run-proxy": "^1.0.1"
+    "rollup-plugin-uglify": "^1.0.1",
+    "run-proxy": "^1.0.1",
+    "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "release-script": {
     "altPkgRootFolder": "lib"
