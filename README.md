@@ -54,12 +54,11 @@ element.vanillaTilt.reset();
 ### Install
 You can copy and include any of the following file:
 
-TO DO (auto generate those files):
+TO DO (automatically build those):
+
 * dest/vanilla-tilt.js ~ 6kb
 * dest/vanilla-tilt.min.js ~ 3.5kb
 * dest/vanilla-tilt.babel.js ~ 8.5kb
 * dest/vanilla-tilt.babel.min.js ~ 4.3kb
 
 in your webiste.
-
-(you can download them temporary from: https://github.com/micku7zu/vanilla-tilt.js/releases)
