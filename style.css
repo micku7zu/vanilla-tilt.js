@@ -1,0 +1,421 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 22px;
+    color: #333333;
+}
+
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.tiltjs {
+    text-decoration: underline;
+}
+
+aside {
+    flex-grow: 1;
+    flex-basis: 300px;
+    text-align: center;
+    overflow-y: scroll;
+    padding: 50px;
+}
+
+main {
+    flex-grow: 2;
+    border-left: 1px solid #ededed;
+    overflow-y: auto;
+}
+
+section {
+    padding: 5vw;
+    border-bottom: 1px solid #ededed;
+}
+
+p, ul, li {
+    margin: 0px;
+    padding: 0px;
+}
+
+p {
+    margin: 10px 0px;
+}
+
+li {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+h3:first-child {
+    margin-top: 0px;
+}
+
+.logo {
+    display: block;
+
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+
+    line-height: 300px;
+    text-align: center;
+
+    color: white;
+    font-size: 36px;
+
+    background: #0099F7; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #0099F7 , #F11712); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #0099F7 , #F11712); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: perspective(500px);
+    transform: perspective(500px);
+}
+
+.mobileLogo {
+    display: none;
+    margin: 50px auto;
+}
+
+.logo > span {
+    position: relative;
+    display: block;
+    -webkit-transform: translateZ(50px) scale(0.7);
+    transform: translateZ(50px) scale(0.7);
+}
+
+.logo > span:after {
+    content: "Gihub";
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    opacity: 0.8;
+
+    transition: 0.3s ease all;
+}
+
+.logo > span:before {
+    content: "View source";
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+
+    opacity: 0;
+
+    display: inline-block;
+    width: 100%;
+
+    transition: 0.3s ease all;
+}
+
+.logo:hover > span:after {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.logo:hover > span:before {
+    opacity: 0.8;
+    transform: translateX(-50%);
+}
+
+.logo > span > span {
+    display: block;
+    font-size: 12px;
+}
+
+.logo:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    box-shadow: 0 20px 70px -10px rgba(51, 51, 51, 0.7), 0 50px 100px 0 rgba(51, 51, 51, 0.2);
+    z-index: -1;
+    -webkit-transform: translateZ(-50px);
+    transform: translateZ(-50px);
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+#logoJquery {
+    margin-top: 0px;
+    max-width: 150px;
+    max-height: 150px;
+    margin: 0px auto;
+    line-height: 150px;
+
+    background-color: #7e56ff;
+    background-image: -webkit-linear-gradient(300deg, #5a00ff 0%, #ff1ff7 100%, #ff1ff7 100%);
+    background-image: linear-gradient(150deg, #5a00ff 0%, #ff1ff7 100%, #ff1ff7 100%);
+}
+
+aside h6 {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 15px;
+}
+
+#logoJquery span:before {
+    content: "Gijs Rogé"
+}
+
+#logoJquery span:after {
+    content: "jQuery";
+}
+
+.downloadBox {
+    display: inline-block;
+    width: 200px;
+    height: 90px;
+
+    padding: 2px;
+    margin-right: 15px;
+    margin-bottom: 25px;
+
+    color: #333333;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+
+
+.downloadBox:nth-child(1) {
+    background: #136a8a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #136a8a, #267871); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #136a8a, #267871); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.downloadBox:nth-child(2) {
+    background: #7b4397; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #7b4397, #dc2430); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #7b4397, #dc2430); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.downloadBox:nth-child(3) {
+    background: #00bf8f; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #00bf8f, #001510); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #00bf8f, #001510); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.downloadBox:nth-child(4) {
+    background: #24C6DC; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #24C6DC, #514A9D); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #24C6DC, #514A9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.downloadBox .content {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    font-size: 18px;
+
+    background-color: rgba(255, 255, 255, 1);
+
+    transition: 0.3s ease;
+    transition-property: color, background;
+}
+
+.downloadBox:hover .content {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+
+.downloadBox:hover:after {
+    opacity: 1;
+}
+
+.downloadBox .content span {
+    font-size: 14px;
+}
+
+.use {
+    font-size: 16px;
+}
+
+.example {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-around;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.example .box {
+    height: 150px;
+    background-color: red;
+    width: 200px;
+}
+
+.example .info {
+    font-size: 18px;
+    width: 70%;
+}
+
+.example li {
+    margin: 10px;
+}
+
+.example .info h3 {
+    margin: 0px;
+}
+
+.example:nth-child(2) .box {
+    background-image: -webkit-linear-gradient(315deg, #ff008a 0%, #101c25 100%);
+    background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+}
+
+.example .info pre.inline {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.example:nth-child(3) .box {
+    background-image: -webkit-linear-gradient(315deg, #ff00ba 0%, #fae713 100%);
+    background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+
+    transform-style: preserve-3d;
+}
+
+.example .box .inner {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translateZ(30px) translateX(-50%) translateY(-50%);
+    box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
+    background-color: white;
+}
+
+.example:nth-child(4) .box {
+    background: #F7971E; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #F7971E, #FFD200); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #F7971E, #FFD200); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(5) .box {
+    background: #34e89e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #34e89e, #0f3443); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #34e89e, #0f3443); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(6) .box {
+    background: #4568DC; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #4568DC, #B06AB3); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #4568DC, #B06AB3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(7) .box {
+    background: #DCE35B; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #DCE35B, #45B649); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #DCE35B, #45B649); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(8) .box {
+    background: #00c3ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #00c3ff, #ffff1c); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #00c3ff, #ffff1c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(9) .box {
+    background: #00bf8f; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #00bf8f, #001510); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #00bf8f, #001510); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+button {
+    display: inline-block;
+    vertical-align: middle;
+    font: inherit;
+    text-align: center;
+    margin: 0;
+    cursor: pointer;
+    overflow: visible;
+    padding: 9px 36px;
+    margin-bottom: 9px;
+    border: none;
+}
+
+.output {
+    height: 200px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 1em 2em;
+    background-color: #f8f8f8;
+    list-style: none;
+    font-size: 12px;
+}
+
+.output li {
+    font-size: 14px;
+}
+
+pre {
+    background-color: #f8f8f8 !important;
+    font-size: 16px !important;
+}
+
+@media only screen and (max-width: 1070px) {
+    .logo {
+        max-height: 200px;
+        line-height: 200px;
+    }
+    .logo span {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    aside {
+        display: none;
+    }
+    .logo span {
+        font-size: 40px;
+    }
+    .mobileLogo {
+        display: block;
+    }
+    .example {
+        flex-wrap: wrap;
+    }
+    .example .box {
+        margin-bottom: 20px;
+    }
+    .example .info {
+        width: 90%;
+    }
+    .downloadBox {
+        margin: 15px 0;
+        width: 100%;
+    }
+    .downloadBox:last-child {
+        margin-bottom: 30px;
+    }
+}
