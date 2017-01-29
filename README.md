@@ -1,32 +1,31 @@
 # vanilla-tilt.js
-Rewritten from [Tilt.js](https://github.com/gijsroge/tilt.js).
-**All copyright goes to [https://github.com/gijsroge/tilt.js](https://github.com/gijsroge/tilt.js)**
+A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https://github.com/gijsroge/tilt.js).
 
-A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect without any dependencies.
-![Tilt.js demo gif](http://gijsroge.github.io/tilt.js/tilt.js.gif)
-
-####Take a look at the **[landing page](https://micku7zu.github.io/vanilla-tilt.js/index.html)** for demo's.
+[View landing page (demos)](https://micku7zu.github.io/vanilla-tilt.js/)
 
 ### Usage
 
 ```html
-<!DOCTYPE html>
 <body>
-    <div data-tilt></div> <!-- Tilt element -->
-    <script src="vanilla-tilt.js"></script> <!-- Load vanilla-tilt.js library -->
+<div class="your-element" data-tilt></div>
+
+<!-- at the end of the body -->
+<script type="text/javascript" src="vanilla-tilt.js"></script>
 </body>
 ```
 
 ### Options
 ```js
-max:            20,     //maxTilt
-perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
-easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-scale:          1,      // 2 = 200%, 1.5 = 150%, etc..
-speed:          300,    // Speed of the enter/exit transition.
-transition:     true,   // Set a transition on enter/exit.
-axis:           null,   // What axis should be disabled. Can be X or Y.
-reset:          true    // If the tilt effect has to be reset on exit.
+{
+    max:            35,     // max tilt rotation (degrees)
+    perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
+    scale:          1,      // 2 = 200%, 1.5 = 150%, etc..
+    speed:          300,    // Speed of the enter/exit transition
+    transition:     true,   // Set a transition on enter/exit.
+    axis:           null,   // What axis should be disabled. Can be X or Y.
+    reset:          true    // If the tilt effect has to be reset on exit.
+    easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+}
 ```
 
 ### Events
@@ -54,12 +53,21 @@ element.vanillaTilt.reset();
 ### Install
 You can copy and include any of the following file:
 
-TO DO (auto generate those files):
-* dest/vanilla-tilt.js ~ 6kb
-* dest/vanilla-tilt.min.js ~ 3.5kb
-* dest/vanilla-tilt.babel.js ~ 8.5kb
-* dest/vanilla-tilt.babel.min.js ~ 4.3kb
+TO DO (automatically build those):
+
+* [dest/vanilla-tilt.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dest/vanilla-tilt.js) ~ 6kb
+* [dest/vanilla-tilt.min.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dest/vanilla-tilt.min.js) ~ 3.5kb
+* [dest/vanilla-tilt.babel.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dest/vanilla-tilt.babel.js) ~ 8.5kb
+* [dest/vanilla-tilt.babel.min.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dest/vanilla-tilt.babel.min.js) ~ 4.3kb
 
 in your webiste.
 
-(you can download them temporary from: https://github.com/micku7zu/vanilla-tilt.js/releases)
+### Credits
+
+Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
+
+Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
+
+### License
+
+MIT License
