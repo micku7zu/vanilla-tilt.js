@@ -62,6 +62,11 @@ TO DO (automatically build those):
 
 in your webiste.
 
+### Credits
+
+Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
+
+Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 
 ### License
 
