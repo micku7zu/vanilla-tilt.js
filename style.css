@@ -64,10 +64,12 @@ h3:first-child {
     display: block;
 
     width: 100%;
-    max-width: 300px;
-    height: 300px;
+    max-width: 200px;
+    height: 200px;
 
-    line-height: 300px;
+    margin: 0px auto;
+
+    line-height: 200px;
     text-align: center;
 
     color: white;
@@ -397,7 +399,7 @@ pre {
         display: none;
     }
     .logo span {
-        font-size: 40px;
+        font-size: 35px;
     }
     .mobileLogo {
         display: block;
