@@ -2,7 +2,7 @@
  * Created by micku7zu on 1/27/2017.
  * Original idea: http://gijsroge.github.io/tilt.js/
  * MIT License.
- * Version 1.0.0
+ * Version 1.0.1
  */
 "use strict";
 (function (undefined) {
@@ -53,11 +53,7 @@
         }
 
         onMouseEnter(event) {
-            this.width = this.element.offsetWidth;
-            this.height = this.element.offsetHeight;
-            this.left = this.element.offsetLeft;
-            this.top = this.element.offsetTop;
-
+            this.updateElementPosition();
             this.element.style.willChange = "transform";
             this.setTransition();
         }
@@ -94,8 +90,8 @@
         }
 
         getValues() {
-            let x = (this.event.pageX - this.left) / this.width;
-            let y = (this.event.pageY - this.top) / this.height;
+            let x = (this.event.clientX - this.left) / this.width;
+            let y = (this.event.clientY - this.top) / this.height;
 
             x = Math.min(Math.max(x, 0), 1);
             y = Math.min(Math.max(y, 0), 1);
@@ -109,6 +105,15 @@
                 percentageX: x * 100,
                 percentageY: y * 100
             };
+        }
+
+        updateElementPosition() {
+            let rect = this.element.getBoundingClientRect();
+
+            this.width = this.element.offsetWidth;
+            this.height = this.element.offsetHeight;
+            this.left = rect.left;
+            this.top = rect.top;
         }
 
         update() {
@@ -135,7 +140,7 @@
 
         extendSettings(settings) {
             let defaultSettings = {
-                max: 20,
+                max: 35,
                 perspective: 1000,
                 easing: "cubic-bezier(.03,.98,.52,.99)",
                 scale: "1",
