@@ -11,7 +11,7 @@ var classCallCheck = function (instance, Constructor) {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.1.0
+ * Version 1.2.0
  */
 
 var VanillaTilt = function () {
@@ -34,6 +34,8 @@ var VanillaTilt = function () {
 
     this.element = element;
     this.settings = this.extendSettings(settings);
+
+    this.reverse = this.settings.reverse ? -1 : 1;
 
     this.addEventListeners();
   }
@@ -105,8 +107,8 @@ var VanillaTilt = function () {
     x = Math.min(Math.max(x, 0), 1);
     y = Math.min(Math.max(y, 0), 1);
 
-    var tiltX = (this.settings.max / 2 - x * this.settings.max).toFixed(2);
-    var tiltY = (y * this.settings.max - this.settings.max / 2).toFixed(2);
+    var tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
+    var tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
 
     return {
       tiltX: tiltX,
@@ -149,6 +151,7 @@ var VanillaTilt = function () {
 
   VanillaTilt.prototype.extendSettings = function extendSettings(settings) {
     var defaultSettings = {
+      reverse: false,
       max: 35,
       perspective: 1000,
       easing: "cubic-bezier(.03,.98,.52,.99)",

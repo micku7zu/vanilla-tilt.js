@@ -2,7 +2,7 @@
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.1.0
+ * Version 1.2.0
  */
 
 export default class VanillaTilt {
@@ -22,6 +22,8 @@ export default class VanillaTilt {
 
     this.element = element;
     this.settings = this.extendSettings(settings);
+
+    this.reverse = this.settings.reverse ? -1 : 1;
 
     this.addEventListeners();
   }
@@ -94,8 +96,8 @@ export default class VanillaTilt {
     x = Math.min(Math.max(x, 0), 1);
     y = Math.min(Math.max(y, 0), 1);
 
-    let tiltX = (this.settings.max / 2 - x * this.settings.max).toFixed(2);
-    let tiltY = (y * this.settings.max - this.settings.max / 2).toFixed(2);
+    let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
+    let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
 
     return {
       tiltX: tiltX,
@@ -138,6 +140,7 @@ export default class VanillaTilt {
 
   extendSettings(settings) {
     let defaultSettings = {
+      reverse: false,
       max: 35,
       perspective: 1000,
       easing: "cubic-bezier(.03,.98,.52,.99)",

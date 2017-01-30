@@ -17,6 +17,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 ### Options
 ```js
 {
+    reverse:        false,  // reverse the tilt direction
     max:            35,     // max tilt rotation (degrees)
     perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
     scale:          1,      // 2 = 200%, 1.5 = 150%, etc..
