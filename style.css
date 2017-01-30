@@ -322,9 +322,9 @@ aside h6 {
 }
 
 .example:nth-child(4) .box {
-    background: #F7971E; /* fallback for old browsers */
-    background: -webkit-linear-gradient(135deg, #F7971E, #FFD200); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(135deg, #F7971E, #FFD200); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #fc00ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #fc00ff , #00dbde); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #fc00ff , #00dbde); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .example:nth-child(5) .box {
@@ -355,6 +355,12 @@ aside h6 {
     background: #00bf8f; /* fallback for old browsers */
     background: -webkit-linear-gradient(135deg, #00bf8f, #001510); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(135deg, #00bf8f, #001510); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.example:nth-child(10) .box {
+    background: #314755; /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #314755 , #26a0da); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(135deg, #314755 , #26a0da); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 button {

@@ -95,6 +95,7 @@
 
             <h4>All options with defaults</h4>
             <pre><code class="language-javascript">{
+	reverse:        false,  // reverse the tilt direction
 	max:            35,     // max tilt rotation (degrees)
 	perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
 	scale:          1,      // 2 = 200%, 1.5 = 150%, etc..
@@ -156,6 +157,14 @@
                     to your inner elements that have to pop out.
                 </li>
             </ol>
+        </div>
+    </section>
+    <section class="example">
+        <div class="box" data-tilt data-tilt-reverse="true"></div>
+        <div class="info">
+            <h3>Reverse tilt</h3>
+            <p>Setting this option will reverse the tilt.</p>
+            <pre><code class="language-markup">&lt;div data-tilt data-tilt-reverse="true"&gt;&lt;/div&gt;</code></pre>
         </div>
     </section>
     <section class="example">
