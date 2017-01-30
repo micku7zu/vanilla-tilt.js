@@ -102,7 +102,7 @@ h3:first-child {
 }
 
 .logo > span:after {
-    content: "Gihub";
+    content: "GitHub";
     position: absolute;
     color: white;
     font-size: 18px;
