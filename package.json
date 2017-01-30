@@ -1,0 +1,64 @@
+{
+  "name": "vanilla-tilt",
+  "version": "1.1.0",
+  "description": "Tilt.js library without jQuery dependency.",
+  "main": "lib/vanilla-tilt.js",
+  "dist": "dist/vanilla-tilt.js",
+  "module": "lib/vanilla-tilt.es2015.js",
+  "jsnext:main": "lib/vanilla-tilt.es2015.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "run build:lib && cp ./README.md ./lib",
+    "build:lib": "cross-env NODE_ENV=production babel-node ./build.js",
+    "build:babel": "cross-env NODE_ENV=production babel src -d lib",
+    "deploy": "run build && gh-pages demo",
+    "release:patch": "release patch",
+    "release:minor": "release minor",
+    "release:major": "release major",
+    "release": "release"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babelrc-rollup": "^3.0.0",
+    "cash-cp": "^0.2.0",
+    "cross-env": "^3.1.4",
+    "gh-pages": "^0.12.0",
+    "release-script": "^1.0.2",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "run-proxy": "^1.0.1",
+    "uglify-js": "mishoo/UglifyJS2#harmony"
+  },
+  "release-script": {
+    "altPkgRootFolder": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micku7zu/vanilla-tilt.js.git"
+  },
+  "keywords": [
+    "tilt",
+    "effect",
+    "vanilla",
+    "js",
+    "60fps"
+  ],
+  "author": "Sönke Kluth <soenke.kluth@gmail.com> (http://soenkekluth.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micku7zu/vanilla-tilt.js/issues"
+  },
+  "homepage": "https://github.com/micku7zu/vanilla-tilt.js#readme",
+  "dependencies": {
+    "dom-helpers": "^3.2.0"
+  }
+}
