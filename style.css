@@ -19,7 +19,7 @@ a {
     color: #333;
 }
 
-.tiltjs {
+.link {
     text-decoration: underline;
 }
 
@@ -90,6 +90,10 @@ h3:first-child {
     margin: 50px auto;
 }
 
+.mobileCredits {
+    display: none !important;
+}
+
 .logo > span {
     position: relative;
     display: block;
@@ -98,7 +102,7 @@ h3:first-child {
 }
 
 .logo > span:after {
-    content: "Gihub";
+    content: "GitHub";
     position: absolute;
     color: white;
     font-size: 18px;
@@ -419,5 +423,10 @@ pre {
     }
     .downloadBox:last-child {
         margin-bottom: 30px;
+    }
+    .mobileCredits {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
     }
 }
