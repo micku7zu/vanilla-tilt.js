@@ -1,7 +1,7 @@
 {
   "name": "vanilla-tilt",
   "version": "1.1.0",
-  "description": "Tilt.js library without jQuery dependency.",
+  "description": "A smooth 3D tilt javascript library forked from Tilt.js",
   "main": "lib/vanilla-tilt.js",
   "dist": "dist/vanilla-tilt.js",
   "module": "lib/vanilla-tilt.es2015.js",
@@ -50,7 +50,9 @@
     "effect",
     "vanilla",
     "js",
-    "60fps"
+    "60fps",
+    "smooth",
+    "tilt.js"
   ],
   "author": "Sönke Kluth <soenke.kluth@gmail.com> (http://soenkekluth.com/)",
   "license": "MIT",
