@@ -83,7 +83,7 @@ rollup({
       main: true
     }),
     babel(babelrc()),
-    commonjs(),
+    commonjs()
   ],
   external: external
 }).then((bundle) => {

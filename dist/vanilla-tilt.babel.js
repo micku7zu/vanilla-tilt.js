@@ -211,7 +211,6 @@ if (typeof document !== "undefined") {
    */
   VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
 }
-module.exports = exports["default"];
 
 return VanillaTilt;
 
