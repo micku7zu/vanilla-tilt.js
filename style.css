@@ -83,6 +83,7 @@ h3:first-child {
     transform-style: preserve-3d;
     -webkit-transform: perspective(500px);
     transform: perspective(500px);
+    margin-bottom: 75px;
 }
 
 .mobileLogo {
