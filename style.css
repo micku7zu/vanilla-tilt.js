@@ -27,7 +27,8 @@ aside {
     flex-grow: 1;
     flex-basis: 300px;
     text-align: center;
-    overflow-y: scroll;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 50px;
 }
 
@@ -35,6 +36,7 @@ main {
     flex-grow: 2;
     border-left: 1px solid #ededed;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 section {
@@ -379,6 +381,7 @@ button {
 .output {
     height: 200px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     margin: 0;
     padding: 1em 2em;
     background-color: #f8f8f8;
