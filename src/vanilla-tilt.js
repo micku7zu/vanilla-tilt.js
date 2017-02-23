@@ -5,7 +5,7 @@
  * Version 1.2.0
  */
 
-export default class VanillaTilt {
+class VanillaTilt {
   constructor(element, settings = {}) {
     if (!(element instanceof Node)) {
       throw ("Can't initialize VanillaTilt because " + element + " is not a Node.");
@@ -201,4 +201,18 @@ if (typeof document !== "undefined") {
    * Auto load
    */
   VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+}
+
+/**
+ * Module Wrapper
+ * --------------
+ */
+if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+  define(function () {
+    return VanillaTilt
+  })
+} else if (typeof module !== 'undefined' && module.exports) {
+  module.exports = VanillaTilt
+} else {
+  window.VanillaTilt = VanillaTilt
 }
