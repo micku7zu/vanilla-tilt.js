@@ -1,5 +1,21 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+
+
+
+
+
+
+
+
+
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -214,4 +230,16 @@ if (typeof document !== "undefined") {
   VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
 }
 
-module.exports = VanillaTilt;
+/**
+ * Module Wrapper
+ * --------------
+ */
+if (typeof define === 'function' && _typeof(define.amd) === 'object' && define.amd) {
+  define(function () {
+    return VanillaTilt;
+  });
+} else if (typeof module !== 'undefined' && module.exports) {
+  module.exports = VanillaTilt;
+} else {
+  window.VanillaTilt = VanillaTilt;
+}
