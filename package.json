@@ -1,11 +1,11 @@
 {
   "name": "vanilla-tilt",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A smooth 3D tilt javascript library forked from Tilt.js",
   "main": "lib/vanilla-tilt.js",
-  "dist": "dist/vanilla-tilt.js",
   "module": "lib/vanilla-tilt.es2015.js",
   "jsnext:main": "lib/vanilla-tilt.es2015.js",
+  "distrib": "dist/vanilla-tilt.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:lib && cp ./README.md ./lib",
@@ -43,7 +43,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micku7zu/vanilla-tilt.js.git"
+    "url": "https://github.com/micku7zu/vanilla-tilt.js.git"
   },
   "keywords": [
     "tilt",
@@ -54,7 +54,7 @@
     "smooth",
     "tilt.js"
   ],
-  "author": "Sergiu Șandor <mickuz7u@gmail.com>",
+  "author": "Sergiu Șandor <micku7zu@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/micku7zu/vanilla-tilt.js/issues"

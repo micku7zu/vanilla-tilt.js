@@ -63,13 +63,13 @@ rollup({
   bundle.write({
     moduleName: 'VanillaTilt',
     format: 'iife',
-    dest: pkg.dist,
+    dest: pkg.distrib,
   }).then(() => {
-    const code = minify(pkg.dist, {
+    const code = minify(pkg.distrib, {
       mangle: {except: ['VanillaTilt']}
     }).code;
 
-    fs.writeFileSync(pkg.dist.replace('.js', '.min.js'), code);
+    fs.writeFileSync(pkg.distrib.replace('.js', '.min.js'), code);
     return bundle;
   })
 }).catch(err => console.log(err.stack));
@@ -87,7 +87,7 @@ rollup({
   ],
   external: external
 }).then((bundle) => {
-  const dest = pkg.dist.replace('.js', '.babel.js');
+  const dest = pkg.distrib.replace('.js', '.babel.js');
   bundle.write({
     moduleName: 'VanillaTilt',
     format: 'iife',
