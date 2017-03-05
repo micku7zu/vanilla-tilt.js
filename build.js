@@ -17,14 +17,14 @@ rollup({
   entry: 'src/vanilla-tilt.js',
   plugins: [
     nodeResolve({
-      module: true,
+      module_es2015: true,
       jsnext: true,
       main: true,
     })
   ],
   external: external
 }).then(bundle => bundle.write({
-  dest: pkg.module,
+  dest: pkg.module_es2015,
   format: 'es'
 })).catch(err => console.log(err.stack));
 
@@ -32,7 +32,7 @@ rollup({
   entry: 'src/vanilla-tilt.js',
   plugins: [
     nodeResolve({
-      module: true,
+      module_es2015: true,
       jsnext: true,
       main: true,
     }),
@@ -53,7 +53,7 @@ rollup({
   entry: 'src/vanilla-tilt.js',
   plugins: [
     nodeResolve({
-      module: true,
+      module_es2015: true,
       jsnext: true,
       main: true,
     })
@@ -78,7 +78,7 @@ rollup({
   entry: 'src/vanilla-tilt.js',
   plugins: [
     nodeResolve({
-      module: true,
+      module_es2015: true,
       jsnext: true,
       main: true
     }),

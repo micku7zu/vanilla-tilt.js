@@ -59,6 +59,12 @@ You can copy and include any of the following file:
 * [dist/vanilla-tilt.babel.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.js) ~ 8.5kb
 * [dist/vanilla-tilt.babel.min.js](https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.min.js) ~ 4.3kb
 
+Also available on npm https://www.npmjs.com/package/vanilla-tilt
+
+```
+npm install vanilla-tilt
+```
+
 ### Credits
 
 Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
