@@ -5,7 +5,7 @@ var VanillaTilt = (function () {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.3.0
+ * Version 1.3.1
  */
 
 class VanillaTilt {
