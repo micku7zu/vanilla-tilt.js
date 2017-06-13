@@ -30,8 +30,10 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     axis:              null,   // What axis should be disabled. Can be X or Y.
     reset:             true    // If the tilt effect has to be reset on exit.
     easing:            "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-    "max-glare":       1,
-    "glare-prerender": false
+    glare:             false   // if it should have a "glare" effect
+    "max-glare":       1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
+    "glare-prerender": false   // false = VanillaTilt creates the glare elements for you, otherwise
+                               // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
 }
 ```
 

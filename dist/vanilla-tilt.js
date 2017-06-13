@@ -5,7 +5,7 @@ var VanillaTilt = (function () {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.3.1
+ * Version 1.4.0
  */
 
 class VanillaTilt {
@@ -27,11 +27,14 @@ class VanillaTilt {
     this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
-    // If [data-tilt-glare] or [data-tilt-glare="true"] or [data-tilt-glare="1"]
+
     this.glare = this.isSettingTrue(this.settings.glare);
     this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
 
-    if (this.glare) this.prepareGlare();
+    if (this.glare) {
+      this.prepareGlare();
+    }
+
     this.addEventListeners();
   }
 
@@ -48,14 +51,18 @@ class VanillaTilt {
     this.element.addEventListener("mouseenter", this.onMouseEnterBind);
     this.element.addEventListener("mousemove", this.onMouseMoveBind);
     this.element.addEventListener("mouseleave", this.onMouseLeaveBind);
-    if (this.glare) window.addEventListener("resize", this.onWindowResizeBind);
+    if (this.glare) {
+      window.addEventListener("resize", this.onWindowResizeBind);
+    }
   }
 
   removeEventListeners() {
     this.element.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.element.removeEventListener("mousemove", this.onMouseMoveBind);
     this.element.removeEventListener("mouseleave", this.onMouseLeaveBind);
-    if (this.glare) window.removeEventListener("resize", this.onWindowResizeBind);
+    if (this.glare) {
+      window.removeEventListener("resize", this.onWindowResizeBind);
+    }
   }
 
   destroy() {
@@ -101,9 +108,10 @@ class VanillaTilt {
         "rotateY(0deg) " +
         "scale3d(1, 1, 1)";
     });
+
     if (this.glare) {
-      this.glareElement.style.transform = `rotate(180deg) translate(-50%, -50%)`;
-      this.glareElement.style.opacity = `0`;
+      this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
+      this.glareElement.style.opacity = '0';
     }
   }
 
@@ -116,12 +124,14 @@ class VanillaTilt {
 
     let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
     let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
 
     return {
       tiltX: tiltX,
       tiltY: tiltY,
       percentageX: x * 100,
-      percentageY: y * 100
+      percentageY: y * 100,
+      angle: angle
     };
   }
 
@@ -175,39 +185,37 @@ class VanillaTilt {
     this.glareElementWrapper = this.element.querySelector(".js-tilt-glare");
     this.glareElement = this.element.querySelector(".js-tilt-glare-inner");
 
-    if (this.glarePrerender) return;
+    if (this.glarePrerender) {
+      return;
+    }
 
-    const glareElementWrapperStyle = {
+    Object.assign(this.glareElementWrapper.style, {
       "position": "absolute",
       "top": "0",
       "left": "0",
       "width": "100%",
       "height": "100%",
       "overflow": "hidden"
-    };
+    });
 
-    Object.assign(this.glareElementWrapper.style, glareElementWrapperStyle);
-
-    const glareElementStyle = {
+    Object.assign(this.glareElement.style, {
       'position': 'absolute',
       'top': '50%',
       'left': '50%',
       'pointer-events': 'none',
       'background-image': `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
-      'width': `${this.element.offsetWidth*2}px`,
-      'height': `${this.element.offsetWidth*2}px`,
+      'width': `${this.element.offsetWidth * 2}px`,
+      'height': `${this.element.offsetWidth * 2}px`,
       'transform': 'rotate(180deg) translate(-50%, -50%)',
       'transform-origin': '0% 0%',
       'opacity': '0',
-    };
-
-    Object.assign(this.glareElement.style, glareElementStyle);
+    });
   }
 
   updateGlareSize() {
     Object.assign(this.glareElement.style, {
-      'width': `${this.element.offsetWidth*2}`,
-      'height': `${this.element.offsetWidth*2}`,
+      'width': `${this.element.offsetWidth * 2}`,
+      'height': `${this.element.offsetWidth * 2}`,
     });
   }
 
@@ -222,7 +230,9 @@ class VanillaTilt {
 
     this.transitionTimeout = setTimeout(() => {
       this.element.style.transition = "";
-      if (this.glare) this.glareElement.style.transition = "";
+      if (this.glare) {
+        this.glareElement.style.transition = "";
+      }
     }, this.settings.speed);
 
   }
