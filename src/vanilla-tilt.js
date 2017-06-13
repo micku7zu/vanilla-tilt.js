@@ -113,12 +113,14 @@ export default class VanillaTilt {
 
     let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
     let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
 
     return {
       tiltX: tiltX,
       tiltY: tiltY,
       percentageX: x * 100,
-      percentageY: y * 100
+      percentageY: y * 100,
+      angle: angle
     };
   }
 
@@ -191,8 +193,8 @@ export default class VanillaTilt {
       'left': '50%',
       'pointer-events': 'none',
       'background-image': `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
-      'width': `${this.element.offsetWidth*2}px`,
-      'height': `${this.element.offsetWidth*2}px`,
+      'width': `${this.element.offsetWidth * 2}px`,
+      'height': `${this.element.offsetWidth * 2}px`,
       'transform': 'rotate(180deg) translate(-50%, -50%)',
       'transform-origin': '0% 0%',
       'opacity': '0',
@@ -203,8 +205,8 @@ export default class VanillaTilt {
 
   updateGlareSize() {
     Object.assign(this.glareElement.style, {
-      'width': `${this.element.offsetWidth*2}`,
-      'height': `${this.element.offsetWidth*2}`,
+      'width': `${this.element.offsetWidth * 2}`,
+      'height': `${this.element.offsetWidth * 2}`,
     });
   }
 
