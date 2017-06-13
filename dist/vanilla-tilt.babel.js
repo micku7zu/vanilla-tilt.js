@@ -36,24 +36,35 @@ var VanillaTilt = function () {
     this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
+    // If [data-tilt-glare] or [data-tilt-glare="true"] or [data-tilt-glare="1"]
+    this.glare = this.isSettingTrue(this.settings.glare);
+    this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
 
+    if (this.glare) this.prepareGlare();
     this.addEventListeners();
   }
+
+  VanillaTilt.prototype.isSettingTrue = function isSettingTrue(setting) {
+    return setting === "" || setting === true || setting === 1;
+  };
 
   VanillaTilt.prototype.addEventListeners = function addEventListeners() {
     this.onMouseEnterBind = this.onMouseEnter.bind(this);
     this.onMouseMoveBind = this.onMouseMove.bind(this);
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
+    this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
 
     this.element.addEventListener("mouseenter", this.onMouseEnterBind);
     this.element.addEventListener("mousemove", this.onMouseMoveBind);
     this.element.addEventListener("mouseleave", this.onMouseLeaveBind);
+    if (this.glare) window.addEventListener("resize", this.onWindowResizeBind);
   };
 
   VanillaTilt.prototype.removeEventListeners = function removeEventListeners() {
     this.element.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.element.removeEventListener("mousemove", this.onMouseMoveBind);
     this.element.removeEventListener("mouseleave", this.onMouseLeaveBind);
+    if (this.glare) window.removeEventListener("resize", this.onWindowResizeBind);
   };
 
   VanillaTilt.prototype.destroy = function destroy() {
@@ -98,6 +109,10 @@ var VanillaTilt = function () {
 
       _this.element.style.transform = "perspective(" + _this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)";
     });
+    if (this.glare) {
+      this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)";
+      this.glareElement.style.opacity = "0";
+    }
   };
 
   VanillaTilt.prototype.getValues = function getValues() {
@@ -132,6 +147,11 @@ var VanillaTilt = function () {
 
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " + "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " + "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " + "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
 
+    if (this.glare) {
+      this.glareElement.style.transform = "rotate(" + values.angle + "deg) translate(-50%, -50%)";
+      this.glareElement.style.opacity = "" + values.percentageY * this.settings["max-glare"] / 100;
+    }
+
     this.element.dispatchEvent(new CustomEvent("tiltChange", {
       "detail": values
     }));
@@ -139,13 +159,79 @@ var VanillaTilt = function () {
     this.updateCall = null;
   };
 
+  /**
+   * Appends the glare element (if glarePrerender equals false)
+   * and sets the default style
+   */
+
+
+  VanillaTilt.prototype.prepareGlare = function prepareGlare() {
+    // If option pre-render is enabled we assume all html/css is present for an optimal glare effect.
+    if (!this.glarePrerender) {
+      // Create glare element
+      var jsTiltGlare = document.createElement("div");
+      jsTiltGlare.classList.add("js-tilt-glare");
+
+      var jsTiltGlareInner = document.createElement("div");
+      jsTiltGlareInner.classList.add("js-tilt-glare-inner");
+
+      jsTiltGlare.appendChild(jsTiltGlareInner);
+      this.element.appendChild(jsTiltGlare);
+    }
+
+    this.glareElementWrapper = this.element.querySelector(".js-tilt-glare");
+    this.glareElement = this.element.querySelector(".js-tilt-glare-inner");
+
+    if (this.glarePrerender) return;
+
+    var glareElementWrapperStyle = {
+      "position": "absolute",
+      "top": "0",
+      "left": "0",
+      "width": "100%",
+      "height": "100%",
+      "overflow": "hidden"
+    };
+
+    Object.assign(this.glareElementWrapper.style, glareElementWrapperStyle);
+
+    var glareElementStyle = {
+      'position': 'absolute',
+      'top': '50%',
+      'left': '50%',
+      'pointer-events': 'none',
+      'background-image': "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)",
+      'width': this.element.offsetWidth * 2 + "px",
+      'height': this.element.offsetWidth * 2 + "px",
+      'transform': 'rotate(180deg) translate(-50%, -50%)',
+      'transform-origin': '0% 0%',
+      'opacity': '0'
+    };
+
+    Object.assign(this.glareElement.style, glareElementStyle);
+  };
+
+  VanillaTilt.prototype.updateGlareSize = function updateGlareSize() {
+    Object.assign(this.glareElement.style, {
+      'width': "" + this.element.offsetWidth * 2,
+      'height': "" + this.element.offsetWidth * 2
+    });
+  };
+
+  VanillaTilt.prototype.onWindowResizeBind = function onWindowResizeBind() {
+    this.updateGlareSize();
+  };
+
   VanillaTilt.prototype.setTransition = function setTransition() {
     var _this2 = this;
 
     clearTimeout(this.transitionTimeout);
     this.element.style.transition = this.settings.speed + "ms " + this.settings.easing;
+    if (this.glare) this.glareElement.style.transition = "opacity " + this.settings.speed + "ms " + this.settings.easing;
+
     this.transitionTimeout = setTimeout(function () {
-      return _this2.element.style.transition = "";
+      _this2.element.style.transition = "";
+      if (_this2.glare) _this2.glareElement.style.transition = "";
     }, this.settings.speed);
   };
 
@@ -159,11 +245,13 @@ var VanillaTilt = function () {
       speed: "300",
       transition: true,
       axis: null,
+      glare: false,
+      "max-glare": 1,
+      "glare-prerender": false,
       reset: true
     };
 
     var newSettings = {};
-
     for (var property in defaultSettings) {
       if (property in settings) {
         newSettings[property] = settings[property];
