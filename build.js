@@ -3,7 +3,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import babelrc from 'babelrc-rollup';
-import {minify} from 'uglify-js';
+import {minify} from 'uglify-es';
 import fs from 'fs';
 
 const pkg = require('./package.json');

@@ -36,7 +36,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
     "run-proxy": "^1.0.1",
-    "uglify-js": "mishoo/UglifyJS2#harmony"
+    "uglify-es": "github:mishoo/UglifyJS2#harmony"
   },
   "release-script": {
     "altPkgRootFolder": "lib"
