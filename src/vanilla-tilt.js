@@ -24,11 +24,14 @@ export default class VanillaTilt {
     this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
-    // If [data-tilt-glare] or [data-tilt-glare="true"] or [data-tilt-glare="1"]
+
     this.glare = this.isSettingTrue(this.settings.glare);
     this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
 
-    if (this.glare) this.prepareGlare();
+    if (this.glare) {
+      this.prepareGlare();
+    }
+
     this.addEventListeners();
   }
 
@@ -45,14 +48,18 @@ export default class VanillaTilt {
     this.element.addEventListener("mouseenter", this.onMouseEnterBind);
     this.element.addEventListener("mousemove", this.onMouseMoveBind);
     this.element.addEventListener("mouseleave", this.onMouseLeaveBind);
-    if (this.glare) window.addEventListener("resize", this.onWindowResizeBind);
+    if (this.glare) {
+      window.addEventListener("resize", this.onWindowResizeBind);
+    }
   }
 
   removeEventListeners() {
     this.element.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.element.removeEventListener("mousemove", this.onMouseMoveBind);
     this.element.removeEventListener("mouseleave", this.onMouseLeaveBind);
-    if (this.glare) window.removeEventListener("resize", this.onWindowResizeBind);
+    if (this.glare) {
+      window.removeEventListener("resize", this.onWindowResizeBind);
+    }
   }
 
   destroy() {
@@ -98,9 +105,10 @@ export default class VanillaTilt {
         "rotateY(0deg) " +
         "scale3d(1, 1, 1)";
     });
+
     if (this.glare) {
-      this.glareElement.style.transform = `rotate(180deg) translate(-50%, -50%)`;
-      this.glareElement.style.opacity = `0`;
+      this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
+      this.glareElement.style.opacity = '0';
     }
   }
 
@@ -174,20 +182,20 @@ export default class VanillaTilt {
     this.glareElementWrapper = this.element.querySelector(".js-tilt-glare");
     this.glareElement = this.element.querySelector(".js-tilt-glare-inner");
 
-    if (this.glarePrerender) return;
+    if (this.glarePrerender) {
+      return;
+    }
 
-    const glareElementWrapperStyle = {
+    Object.assign(this.glareElementWrapper.style, {
       "position": "absolute",
       "top": "0",
       "left": "0",
       "width": "100%",
       "height": "100%",
       "overflow": "hidden"
-    }
+    });
 
-    Object.assign(this.glareElementWrapper.style, glareElementWrapperStyle);
-
-    const glareElementStyle = {
+    Object.assign(this.glareElement.style, {
       'position': 'absolute',
       'top': '50%',
       'left': '50%',
@@ -198,9 +206,7 @@ export default class VanillaTilt {
       'transform': 'rotate(180deg) translate(-50%, -50%)',
       'transform-origin': '0% 0%',
       'opacity': '0',
-    }
-
-    Object.assign(this.glareElement.style, glareElementStyle);
+    });
   }
 
   updateGlareSize() {
@@ -221,7 +227,9 @@ export default class VanillaTilt {
 
     this.transitionTimeout = setTimeout(() => {
       this.element.style.transition = "";
-      if (this.glare) this.glareElement.style.transition = "";
+      if (this.glare) {
+        this.glareElement.style.transition = "";
+      }
     }, this.settings.speed);
 
   }
