@@ -237,15 +237,15 @@ document.querySelector("#enable-button").addEventListener("click", function () {
         <div class="info">
             <h3>Tilt change event</h3>
             <p>The tilt change event wil output the x,y & percentages of tilting.</p>
-            <pre><code class="language-javascript">let destroyBox = document.querySelector("#destroy-box");
-VanillaTilt.init(destroyBox);
+            <pre><code class="language-javascript">let eventBox = document.querySelector("#box-event");
+let outputContainer = document.querySelector(".output");
+VanillaTilt.init(eventBox);
 
-document.querySelector("#destroy-button").addEventListener("click", function () {
-    destroyBox.vanillaTilt.destroy();
-});
 
-document.querySelector("#enable-button").addEventListener("click", function () {
-    VanillaTilt.init(destroyBox);
+eventBox.addEventListener("tiltChange", function (event) {
+	let li = document.createElement("li");
+	li.textContent = JSON.stringify(event.detail);
+	outputContainer.insertBefore(li, outputContainer.firstChild);
 });</code></pre>
             <ul class="output"></ul>
         </div>
