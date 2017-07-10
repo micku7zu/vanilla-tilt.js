@@ -5,7 +5,7 @@ var VanillaTilt = (function () {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.4.0
+ * Version 1.4.1
  */
 
 class VanillaTilt {
@@ -22,6 +22,7 @@ class VanillaTilt {
     this.updateCall = null;
 
     this.updateBind = this.update.bind(this);
+    this.resetBind = this.reset.bind(this);
 
     this.element = element;
     this.settings = this.extendSettings(settings);
@@ -66,6 +67,13 @@ class VanillaTilt {
   }
 
   destroy() {
+    clearTimeout(this.transitionTimeout);
+    if (this.updateCall !== null) {
+      cancelAnimationFrame(this.updateCall);
+    }
+
+    this.reset();
+
     this.removeEventListeners();
     this.element.vanillaTilt = null;
     delete this.element.vanillaTilt;
@@ -92,22 +100,20 @@ class VanillaTilt {
     this.setTransition();
 
     if (this.settings.reset) {
-      this.reset();
+      requestAnimationFrame(this.resetBind);
     }
   }
 
   reset() {
-    requestAnimationFrame(() => {
-      this.event = {
-        pageX: this.left + this.width / 2,
-        pageY: this.top + this.height / 2
-      };
+    this.event = {
+      pageX: this.left + this.width / 2,
+      pageY: this.top + this.height / 2
+    };
 
-      this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
-        "rotateX(0deg) " +
-        "rotateY(0deg) " +
-        "scale3d(1, 1, 1)";
-    });
+    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
+      "rotateX(0deg) " +
+      "rotateY(0deg) " +
+      "scale3d(1, 1, 1)";
 
     if (this.glare) {
       this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';

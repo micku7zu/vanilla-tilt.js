@@ -11,7 +11,7 @@ var classCallCheck = function (instance, Constructor) {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.4.0
+ * Version 1.4.1
  */
 
 var VanillaTilt = function () {
@@ -31,6 +31,7 @@ var VanillaTilt = function () {
     this.updateCall = null;
 
     this.updateBind = this.update.bind(this);
+    this.resetBind = this.reset.bind(this);
 
     this.element = element;
     this.settings = this.extendSettings(settings);
@@ -75,6 +76,13 @@ var VanillaTilt = function () {
   };
 
   VanillaTilt.prototype.destroy = function destroy() {
+    clearTimeout(this.transitionTimeout);
+    if (this.updateCall !== null) {
+      cancelAnimationFrame(this.updateCall);
+    }
+
+    this.reset();
+
     this.removeEventListeners();
     this.element.vanillaTilt = null;
     delete this.element.vanillaTilt;
@@ -101,21 +109,17 @@ var VanillaTilt = function () {
     this.setTransition();
 
     if (this.settings.reset) {
-      this.reset();
+      requestAnimationFrame(this.resetBind);
     }
   };
 
   VanillaTilt.prototype.reset = function reset() {
-    var _this = this;
+    this.event = {
+      pageX: this.left + this.width / 2,
+      pageY: this.top + this.height / 2
+    };
 
-    requestAnimationFrame(function () {
-      _this.event = {
-        pageX: _this.left + _this.width / 2,
-        pageY: _this.top + _this.height / 2
-      };
-
-      _this.element.style.transform = "perspective(" + _this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)";
-    });
+    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)";
 
     if (this.glare) {
       this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
@@ -231,16 +235,16 @@ var VanillaTilt = function () {
   };
 
   VanillaTilt.prototype.setTransition = function setTransition() {
-    var _this2 = this;
+    var _this = this;
 
     clearTimeout(this.transitionTimeout);
     this.element.style.transition = this.settings.speed + "ms " + this.settings.easing;
     if (this.glare) this.glareElement.style.transition = "opacity " + this.settings.speed + "ms " + this.settings.easing;
 
     this.transitionTimeout = setTimeout(function () {
-      _this2.element.style.transition = "";
-      if (_this2.glare) {
-        _this2.glareElement.style.transition = "";
+      _this.element.style.transition = "";
+      if (_this.glare) {
+        _this.glareElement.style.transition = "";
       }
     }, this.settings.speed);
   };
