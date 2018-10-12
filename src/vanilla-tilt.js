@@ -93,7 +93,7 @@ export default class VanillaTilt {
     this.updateCall = requestAnimationFrame(this.updateBind);
   }
 
-  onMouseLeave(event) {
+  onMouseLeave() {
     this.setTransition();
 
     if (this.settings.reset) {
