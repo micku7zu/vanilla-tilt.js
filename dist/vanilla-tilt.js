@@ -24,9 +24,9 @@ class VanillaTilt {
     this.updateBind = this.update.bind(this);
     this.resetBind = this.reset.bind(this);
 
+    this.settings = this.extendSettings(settings);
     this.element = element;
     this.elementListener = this.getElementListener();
-    this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
 
@@ -49,7 +49,7 @@ class VanillaTilt {
    * @return {Node}
    */
   getElementListener() {
-    if (!this.settings.mouseEventElement) { return this.element; }
+    if (!this.settings || !this.settings.mouseEventElement) { return this.element; }
 
     if (typeof this.settings.mouseEventElement === 'string') {
       const mouseEventElement = document.querySelector(this.settings.mouseEventElement);

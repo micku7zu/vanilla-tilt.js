@@ -33,9 +33,9 @@ var VanillaTilt = function () {
     this.updateBind = this.update.bind(this);
     this.resetBind = this.reset.bind(this);
 
+    this.settings = this.extendSettings(settings);
     this.element = element;
     this.elementListener = this.getElementListener();
-    this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
 
@@ -60,7 +60,7 @@ var VanillaTilt = function () {
 
 
   VanillaTilt.prototype.getElementListener = function getElementListener() {
-    if (!this.settings.mouseEventElement) {
+    if (!this.settings || !this.settings.mouseEventElement) {
       return this.element;
     }
 
