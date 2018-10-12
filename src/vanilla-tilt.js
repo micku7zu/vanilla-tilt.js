@@ -21,8 +21,8 @@ export default class VanillaTilt {
     this.updateBind = this.update.bind(this);
     this.resetBind = this.reset.bind(this);
 
-    this.settings = this.extendSettings(settings);
     this.element = element;
+    this.settings = this.extendSettings(settings);
     this.elementListener = this.getElementListener();
 
     this.reverse = this.settings.reverse ? -1 : 1;
