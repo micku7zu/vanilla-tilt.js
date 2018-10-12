@@ -78,9 +78,9 @@ export default class VanillaTilt {
     this.element = null;
   }
 
-  onMouseEnter(event) {
+  onMouseEnter() {
     this.updateElementPosition();
-    this.element.style.willChange = "transform";
+    this.element.style.willChange = 'transform';
     this.setTransition();
   }
 
