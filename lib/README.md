@@ -41,7 +41,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 ```js
 const element = document.querySelector(".js-tilt");
 VanillaTilt.init(element);
-element.addEventListeners("tiltChange", callback);
+element.addEventListener("tiltChange", callback);
 ```
 
 ### Methods
