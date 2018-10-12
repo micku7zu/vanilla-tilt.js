@@ -22,12 +22,13 @@ export default class VanillaTilt {
     this.resetBind = this.reset.bind(this);
 
     this.element = element;
+    this.elementListener = this.getElementListener();
     this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
 
     this.glare = this.isSettingTrue(this.settings.glare);
-    this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
+    this.glarePrerender = this.isSettingTrue(this.settings['glare-prerender']);
 
     if (this.glare) {
       this.prepareGlare();
@@ -40,26 +41,55 @@ export default class VanillaTilt {
     return setting === "" || setting === true || setting === 1;
   }
 
+  /**
+   * Method returns element what will be listen mouse events
+   * @return {Node}
+   */
+  getElementListener() {
+    if (!this.settings.mouseEventElement) { return this.element; }
+
+    if (typeof this.settings.mouseEventElement === 'string') {
+      const mouseEventElement = document.querySelector(this.settings.mouseEventElement);
+
+      if (mouseEventElement) {
+        return mouseEventElement;
+      }
+    }
+
+    if (this.settings.mouseEventElement instanceof Node && this.settings.mouseEventElement) {
+      return this.settings.mouseEventElement;
+    }
+  }
+
+  /**
+   * Method set listen methods for this.elementListener
+   * @return {Node}
+   */
   addEventListeners() {
     this.onMouseEnterBind = this.onMouseEnter.bind(this);
     this.onMouseMoveBind = this.onMouseMove.bind(this);
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
     this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
 
-    this.element.addEventListener("mouseenter", this.onMouseEnterBind);
-    this.element.addEventListener("mousemove", this.onMouseMoveBind);
-    this.element.addEventListener("mouseleave", this.onMouseLeaveBind);
+    this.elementListener.addEventListener('mouseenter', this.onMouseEnterBind);
+    this.elementListener.addEventListener('mousemove', this.onMouseMoveBind);
+    this.elementListener.addEventListener('mouseleave', this.onMouseLeaveBind);
+
     if (this.glare) {
-      window.addEventListener("resize", this.onWindowResizeBind);
+      window.addEventListener('resize', this.onWindowResizeBind);
     }
   }
 
+  /**
+   * Method remove event listeners from current this.elementListener
+   */
   removeEventListeners() {
-    this.element.removeEventListener("mouseenter", this.onMouseEnterBind);
-    this.element.removeEventListener("mousemove", this.onMouseMoveBind);
-    this.element.removeEventListener("mouseleave", this.onMouseLeaveBind);
+    this.elementListener.removeEventListener('mouseenter', this.onMouseEnterBind);
+    this.elementListener.removeEventListener('mousemove', this.onMouseMoveBind);
+    this.elementListener.removeEventListener('mouseleave', this.onMouseLeaveBind);
+
     if (this.glare) {
-      window.removeEventListener("resize", this.onWindowResizeBind);
+      window.removeEventListener('resize', this.onWindowResizeBind);
     }
   }
 
@@ -240,20 +270,37 @@ export default class VanillaTilt {
 
   }
 
+  /**
+   * Method return patched settings of instance
+   * @param {boolean} settings.reverse - reverse the tilt direction
+   * @param {number} settings.max - max tilt rotation (degrees)
+   * @param {number} settings.perspective - Transform perspective, the lower the more extreme the tilt gets
+   * @param {string} settings.easing - Easing on enter/exit
+   * @param {number} settings.scale - 2 = 200%, 1.5 = 150%, etc..
+   * @param {number} settings.speed - Speed of the enter/exit transition
+   * @param {boolean} settings.transition - Set a transition on enter/exit
+   * @param settings.axis - What axis should be disabled. Can be X or Y
+   * @param {boolean} settings.glare - What axis should be disabled. Can be X or Y
+   * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
+   * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
+   * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
+   * @param {boolean} settings.mouseEventElement - String selector or link to HTML-element what will be listen mouse events
+   */
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
       max: 35,
       perspective: 1000,
-      easing: "cubic-bezier(.03,.98,.52,.99)",
-      scale: "1",
-      speed: "300",
+      easing: 'cubic-bezier(.03,.98,.52,.99)',
+      scale: 1,
+      speed: 300,
       transition: true,
       axis: null,
       glare: false,
-      "max-glare": 1,
+      'max-glare': 1,
       "glare-prerender": false,
-      reset: true
+      reset: true,
+      mouseEventElement: null,
     };
 
     let newSettings = {};
