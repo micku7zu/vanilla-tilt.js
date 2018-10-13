@@ -137,10 +137,12 @@ export default class VanillaTilt {
       pageY: this.top + this.height / 2
     };
 
-    this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
-      "rotateX(0deg) " +
-      "rotateY(0deg) " +
-      "scale3d(1, 1, 1)";
+    if (this.element && this.element.style) {
+      this.element.style.transform = `perspective(${this.settings.perspective}px) ` +
+        `rotateX(0deg) ` +
+        `rotateY(0deg) ` +
+        `scale3d(1, 1, 1)`;
+    }
 
     if (this.glare) {
       this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
