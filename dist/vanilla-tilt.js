@@ -289,7 +289,7 @@ class VanillaTilt {
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
-   * @param {boolean} settings.mouseEventElement - String selector or link to HTML-element what will be listen mouse events
+   * @param {string|object} settings.mouseEventElement - String selector or link to HTML-element what will be listen mouse events
    */
   extendSettings(settings) {
     let defaultSettings = {
