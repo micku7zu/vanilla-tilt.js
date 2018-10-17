@@ -2,7 +2,7 @@
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.4.2
+ * Version 1.5.0
  */
 
 export default class VanillaTilt {
@@ -28,7 +28,7 @@ export default class VanillaTilt {
     this.reverse = this.settings.reverse ? -1 : 1;
 
     this.glare = this.isSettingTrue(this.settings.glare);
-    this.glarePrerender = this.isSettingTrue(this.settings['glare-prerender']);
+    this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
 
     if (this.glare) {
       this.prepareGlare();
@@ -46,18 +46,20 @@ export default class VanillaTilt {
    * @return {Node}
    */
   getElementListener() {
-    if (!this.settings || !this.settings.mouseEventElement) { return this.element; }
+    if (!this.settings || !this.settings["mouse-event-element"]) {
+      return this.element;
+    }
 
-    if (typeof this.settings.mouseEventElement === 'string') {
-      const mouseEventElement = document.querySelector(this.settings.mouseEventElement);
+    if (typeof this.settings["mouse-event-element"] === "string") {
+      const mouseEventElement = document.querySelector(this.settings["mouse-event-element"]);
 
       if (mouseEventElement) {
         return mouseEventElement;
       }
     }
 
-    if (this.settings.mouseEventElement instanceof Node && this.settings.mouseEventElement) {
-      return this.settings.mouseEventElement;
+    if (this.settings["mouse-event-element"] instanceof Node) {
+      return this.settings["mouse-event-element"];
     }
   }
 
@@ -71,12 +73,12 @@ export default class VanillaTilt {
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
     this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
 
-    this.elementListener.addEventListener('mouseenter', this.onMouseEnterBind);
-    this.elementListener.addEventListener('mousemove', this.onMouseMoveBind);
-    this.elementListener.addEventListener('mouseleave', this.onMouseLeaveBind);
+    this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
+    this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
+    this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
 
     if (this.glare) {
-      window.addEventListener('resize', this.onWindowResizeBind);
+      window.addEventListener("resize", this.onWindowResizeBind);
     }
   }
 
@@ -84,12 +86,12 @@ export default class VanillaTilt {
    * Method remove event listeners from current this.elementListener
    */
   removeEventListeners() {
-    this.elementListener.removeEventListener('mouseenter', this.onMouseEnterBind);
-    this.elementListener.removeEventListener('mousemove', this.onMouseMoveBind);
-    this.elementListener.removeEventListener('mouseleave', this.onMouseLeaveBind);
+    this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
+    this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
+    this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
 
     if (this.glare) {
-      window.removeEventListener('resize', this.onWindowResizeBind);
+      window.removeEventListener("resize", this.onWindowResizeBind);
     }
   }
 
@@ -110,7 +112,7 @@ export default class VanillaTilt {
 
   onMouseEnter() {
     this.updateElementPosition();
-    this.element.style.willChange = 'transform';
+    this.element.style.willChange = "transform";
     this.setTransition();
   }
 
@@ -145,8 +147,8 @@ export default class VanillaTilt {
     }
 
     if (this.glare) {
-      this.glareElement.style.transform = 'rotate(180deg) translate(-50%, -50%)';
-      this.glareElement.style.opacity = '0';
+      this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)";
+      this.glareElement.style.opacity = "0";
     }
   }
 
@@ -234,23 +236,23 @@ export default class VanillaTilt {
     });
 
     Object.assign(this.glareElement.style, {
-      'position': 'absolute',
-      'top': '50%',
-      'left': '50%',
-      'pointer-events': 'none',
-      'background-image': `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
-      'width': `${this.element.offsetWidth * 2}px`,
-      'height': `${this.element.offsetWidth * 2}px`,
-      'transform': 'rotate(180deg) translate(-50%, -50%)',
-      'transform-origin': '0% 0%',
-      'opacity': '0',
+      "position": "absolute",
+      "top": "50%",
+      "left": "50%",
+      "pointer-events": "none",
+      "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
+      "width": `${this.element.offsetWidth * 2}px`,
+      "height": `${this.element.offsetWidth * 2}px`,
+      "transform": "rotate(180deg) translate(-50%, -50%)",
+      "transform-origin": "0% 0%",
+      "opacity": "0",
     });
   }
 
   updateGlareSize() {
     Object.assign(this.glareElement.style, {
-      'width': `${this.element.offsetWidth * 2}`,
-      'height': `${this.element.offsetWidth * 2}`,
+      "width": `${this.element.offsetWidth * 2}`,
+      "height": `${this.element.offsetWidth * 2}`,
     });
   }
 
@@ -285,24 +287,24 @@ export default class VanillaTilt {
    * @param {boolean} settings.glare - What axis should be disabled. Can be X or Y
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
+   * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
-   * @param {string|object} settings.mouseEventElement - String selector or link to HTML-element what will be listen mouse events
    */
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
       max: 35,
       perspective: 1000,
-      easing: 'cubic-bezier(.03,.98,.52,.99)',
+      easing: "cubic-bezier(.03,.98,.52,.99)",
       scale: 1,
       speed: 300,
       transition: true,
       axis: null,
       glare: false,
-      'max-glare': 1,
+      "max-glare": 1,
       "glare-prerender": false,
-      reset: true,
-      mouseEventElement: null,
+      "mouse-event-element": null,
+      reset: true
     };
 
     let newSettings = {};
