@@ -32,8 +32,9 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     easing:            "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     glare:             false   // if it should have a "glare" effect
     "max-glare":       1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-    "glare-prerender": false   // false = VanillaTilt creates the glare elements for you, otherwise
+    "glare-prerender": false,  // false = VanillaTilt creates the glare elements for you, otherwise
                                // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+    mouseEventElement: null    // css-selector or link to HTML-element what will be listen mouse events 
 }
 ```
 
@@ -41,7 +42,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 ```js
 const element = document.querySelector(".js-tilt");
 VanillaTilt.init(element);
-element.addEventListeners("tiltChange", callback);
+element.addEventListener("tiltChange", callback);
 ```
 
 ### Methods
