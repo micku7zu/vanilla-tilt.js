@@ -75,10 +75,12 @@ class VanillaTilt {
     this.onMouseMoveBind = this.onMouseMove.bind(this);
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
     this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
+    this.onDeviceOrientationBind = this.onDeviceOrientation.bind(this);
 
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
+    window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
@@ -92,6 +94,7 @@ class VanillaTilt {
     this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
+    window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.removeEventListener("resize", this.onWindowResizeBind);
@@ -111,6 +114,33 @@ class VanillaTilt {
     delete this.element.vanillaTilt;
 
     this.element = null;
+  }
+
+  onDeviceOrientation(event) {
+    this.updateElementPosition();
+
+    const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
+    const totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
+    
+    const degreesPerPixelX = totalAngleX / this.width;
+    const degreesPerPixelY = totalAngleY / this.height;
+
+    const angleX = event.gamma - this.settings.gyroscopeMinAngleX;
+    const angleY = event.beta - this.settings.gyroscopeMinAngleY;
+
+    const posX = angleX / degreesPerPixelX;
+    const posY = angleY / degreesPerPixelY;
+
+    if (this.updateCall !== null) {
+      cancelAnimationFrame(this.updateCall);
+    }
+
+    this.event = {
+      clientX: posX + this.left,
+      clientY: posY + this.top,
+    };
+
+    this.updateCall = requestAnimationFrame(this.updateBind);
   }
 
   onMouseEnter() {
@@ -292,6 +322,8 @@ class VanillaTilt {
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
+   * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
+   * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
    */
   extendSettings(settings) {
     let defaultSettings = {
@@ -307,7 +339,12 @@ class VanillaTilt {
       "max-glare": 1,
       "glare-prerender": false,
       "mouse-event-element": null,
-      reset: true
+      reset: true,
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
     };
 
     let newSettings = {};
