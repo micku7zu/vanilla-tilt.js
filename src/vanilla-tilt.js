@@ -118,7 +118,7 @@ export default class VanillaTilt {
 
     const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
     const totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
-    
+
     const degreesPerPixelX = totalAngleX / this.width;
     const degreesPerPixelY = totalAngleY / this.height;
 
@@ -338,10 +338,10 @@ export default class VanillaTilt {
       "mouse-event-element": null,
       reset: true,
       gyroscope: true,
-      gyroscopeMinAngleX: -45,
-      gyroscopeMaxAngleX: 45,
-      gyroscopeMinAngleY: -45,
-      gyroscopeMaxAngleY: 45,
+      gyroscopeMinAngleX: -30,
+      gyroscopeMaxAngleX: 30,
+      gyroscopeMinAngleY: 0,
+      gyroscopeMaxAngleY: 90,
     };
 
     let newSettings = {};
