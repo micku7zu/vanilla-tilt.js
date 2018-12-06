@@ -77,7 +77,10 @@ export default class VanillaTilt {
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
-    window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
+
+    if (this.settings.gyroscope) {
+      window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
+    }
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
