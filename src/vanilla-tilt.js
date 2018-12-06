@@ -77,10 +77,7 @@ export default class VanillaTilt {
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
-
-    if (this.settings.gyroscope) {
-      window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
-    }
+    window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
@@ -121,7 +118,7 @@ export default class VanillaTilt {
 
     const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
     const totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
-
+    
     const degreesPerPixelX = totalAngleX / this.width;
     const degreesPerPixelY = totalAngleY / this.height;
 
@@ -323,10 +320,7 @@ export default class VanillaTilt {
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
-   * @param {gyroscopeMinAngleX} settings.gyroscopeMinAngleX - The lower rotation limit on X axis, in degrees
-   * @param {gyroscopeMaxAngleX} settings.gyroscopeMaxAngleX - The upper rotation limit on X axis, in degrees
-   * @param {gyroscopeMinAngleY} settings.gyroscopeMinAngleY - The lower rotation limit on Y axis, in degrees
-   * @param {gyroscopeMaxAngleY} settings.gyroscopeMaxAngleY - The upper rotation limit on Y axis, in degrees
+   * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
    */
   extendSettings(settings) {
     let defaultSettings = {
@@ -344,10 +338,10 @@ export default class VanillaTilt {
       "mouse-event-element": null,
       reset: true,
       gyroscope: true,
-      gyroscopeMinAngleX: -30,
-      gyroscopeMaxAngleX: 30,
-      gyroscopeMinAngleY: 0,
-      gyroscopeMaxAngleY: 90,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
     };
 
     let newSettings = {};
