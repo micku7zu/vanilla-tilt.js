@@ -323,7 +323,10 @@ export default class VanillaTilt {
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
-   * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
+   * @param {gyroscopeMinAngleX} settings.gyroscopeMinAngleX - The lower rotation limit on X axis, in degrees
+   * @param {gyroscopeMaxAngleX} settings.gyroscopeMaxAngleX - The upper rotation limit on X axis, in degrees
+   * @param {gyroscopeMinAngleY} settings.gyroscopeMinAngleY - The lower rotation limit on Y axis, in degrees
+   * @param {gyroscopeMaxAngleY} settings.gyroscopeMaxAngleY - The upper rotation limit on Y axis, in degrees
    */
   extendSettings(settings) {
     let defaultSettings = {
