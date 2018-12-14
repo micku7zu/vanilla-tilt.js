@@ -312,8 +312,8 @@ h4 {
 .example:nth-child(3) .box {
     background-image: -webkit-linear-gradient(315deg, #ff00ba 0%, #fae713 100%);
     background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
-
     transform-style: preserve-3d;
+    transform: perspective(1000px);
 }
 
 .example .box .inner {
