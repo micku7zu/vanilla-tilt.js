@@ -58,6 +58,10 @@ element.vanillaTilt.getValues();
 
 // Reset instance
 element.vanillaTilt.reset();
+
+// It also supports NodeList
+const elements = document.querySelectorAll(".js-tilt");
+VanillaTilt.init(elements);
 ```
 
 ### Install
