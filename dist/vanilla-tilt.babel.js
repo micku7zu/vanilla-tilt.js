@@ -87,7 +87,7 @@ var VanillaTilt = function () {
     this.onMouseEnterBind = this.onMouseEnter.bind(this);
     this.onMouseMoveBind = this.onMouseMove.bind(this);
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
-    this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
+    this.onWindowResizeBind = this.onWindowResize.bind(this);
     this.onDeviceOrientationBind = this.onDeviceOrientation.bind(this);
 
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
@@ -276,7 +276,8 @@ var VanillaTilt = function () {
       "left": "0",
       "width": "100%",
       "height": "100%",
-      "overflow": "hidden"
+      "overflow": "hidden",
+      "pointer-events": "none"
     });
 
     Object.assign(this.glareElement.style, {
@@ -300,7 +301,7 @@ var VanillaTilt = function () {
     });
   };
 
-  VanillaTilt.prototype.onWindowResizeBind = function onWindowResizeBind() {
+  VanillaTilt.prototype.onWindowResize = function onWindowResize() {
     this.updateGlareSize();
   };
 
