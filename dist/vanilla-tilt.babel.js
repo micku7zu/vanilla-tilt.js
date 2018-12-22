@@ -11,7 +11,7 @@ var classCallCheck = function (instance, Constructor) {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.5.0
+ * Version 1.6.0
  */
 
 var VanillaTilt = function () {
@@ -88,10 +88,12 @@ var VanillaTilt = function () {
     this.onMouseMoveBind = this.onMouseMove.bind(this);
     this.onMouseLeaveBind = this.onMouseLeave.bind(this);
     this.onWindowResizeBind = this.onWindowResizeBind.bind(this);
+    this.onDeviceOrientationBind = this.onDeviceOrientation.bind(this);
 
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
+    window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
@@ -107,6 +109,7 @@ var VanillaTilt = function () {
     this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
+    window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.removeEventListener("resize", this.onWindowResizeBind);
@@ -126,6 +129,33 @@ var VanillaTilt = function () {
     delete this.element.vanillaTilt;
 
     this.element = null;
+  };
+
+  VanillaTilt.prototype.onDeviceOrientation = function onDeviceOrientation(event) {
+    this.updateElementPosition();
+
+    var totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
+    var totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
+
+    var degreesPerPixelX = totalAngleX / this.width;
+    var degreesPerPixelY = totalAngleY / this.height;
+
+    var angleX = event.gamma - this.settings.gyroscopeMinAngleX;
+    var angleY = event.beta - this.settings.gyroscopeMinAngleY;
+
+    var posX = angleX / degreesPerPixelX;
+    var posY = angleY / degreesPerPixelY;
+
+    if (this.updateCall !== null) {
+      cancelAnimationFrame(this.updateCall);
+    }
+
+    this.event = {
+      clientX: posX + this.left,
+      clientY: posY + this.top
+    };
+
+    this.updateCall = requestAnimationFrame(this.updateBind);
   };
 
   VanillaTilt.prototype.onMouseEnter = function onMouseEnter() {
@@ -304,6 +334,8 @@ var VanillaTilt = function () {
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
+   * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
+   * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
    */
 
 
@@ -321,7 +353,12 @@ var VanillaTilt = function () {
       "max-glare": 1,
       "glare-prerender": false,
       "mouse-event-element": null,
-      reset: true
+      reset: true,
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45
     };
 
     var newSettings = {};
