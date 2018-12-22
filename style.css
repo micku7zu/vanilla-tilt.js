@@ -457,5 +457,8 @@ aside ul a:hover {
         display: -ms-flexbox !important;
         display: flex !important;
     }
+    .example ol {
+        padding-left: 0px;
+    }
 }
 
