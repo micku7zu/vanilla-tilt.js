@@ -99,6 +99,12 @@ Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
 
 Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 
+#### Contributors
+
+- [Livio Brunner](https://github.com/BrunnerLivio) <<a href="mailto:contact@brunnerliv.io">contact@brunnerliv.io</a>> (Typings & Glare Effect)
+- [Oleg Postoev](https://github.com/Dok11)
+- [Matteo Rigon](https://github.com/matteo-rigon) (Device orientation support)
+
 ### License
 
 MIT License

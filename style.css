@@ -408,6 +408,14 @@ pre {
     font-size: 16px !important;
 }
 
+aside ul {
+    text-align: left;
+}
+
+aside ul a:hover {
+    text-decoration: underline;
+}
+
 @media only screen and (max-width: 1070px) {
     .logo {
         max-height: 200px;
@@ -450,3 +458,4 @@ pre {
         display: flex !important;
     }
 }
+
