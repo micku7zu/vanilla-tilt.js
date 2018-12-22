@@ -132,6 +132,10 @@ var VanillaTilt = function () {
   };
 
   VanillaTilt.prototype.onDeviceOrientation = function onDeviceOrientation(event) {
+    if (event.gamma === null || event.beta === null) {
+      return;
+    }
+
     this.updateElementPosition();
 
     var totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;

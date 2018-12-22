@@ -114,6 +114,10 @@ export default class VanillaTilt {
   }
 
   onDeviceOrientation(event) {
+    if (event.gamma === null || event.beta === null) {
+      return;
+    }
+
     this.updateElementPosition();
 
     const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
