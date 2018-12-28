@@ -2,7 +2,7 @@
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.6.0
+ * Version 1.6.1
  */
 
 export default class VanillaTilt {
@@ -29,6 +29,7 @@ export default class VanillaTilt {
 
     this.glare = this.isSettingTrue(this.settings.glare);
     this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
+    this.gyroscope = this.isSettingTrue(this.settings.gyroscope);
 
     if (this.glare) {
       this.prepareGlare();
@@ -77,10 +78,13 @@ export default class VanillaTilt {
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
-    window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
+    }
+
+    if (this.gyroscope) {
+      window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
     }
   }
 
@@ -91,7 +95,10 @@ export default class VanillaTilt {
     this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
-    window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
+
+    if(this.gyroscope) {
+      window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
+    }
 
     if (this.glare) {
       window.removeEventListener("resize", this.onWindowResizeBind);
