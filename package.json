@@ -6,6 +6,7 @@
   "module_es2015": "lib/vanilla-tilt.es2015.js",
   "jsnext:main": "lib/vanilla-tilt.es2015.js",
   "distrib": "dist/vanilla-tilt.js",
+  "types": "vanilla-tilt.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:lib && cp ./README.md ./lib",
