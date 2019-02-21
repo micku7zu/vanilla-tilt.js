@@ -36,6 +36,7 @@ export default class VanillaTilt {
     }
 
     this.addEventListeners();
+    this.update();
   }
 
   isSettingTrue(setting) {
@@ -129,7 +130,7 @@ export default class VanillaTilt {
 
     const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
     const totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
-    
+
     const degreesPerPixelX = totalAngleX / this.width;
     const degreesPerPixelY = totalAngleY / this.height;
 
@@ -194,15 +195,26 @@ export default class VanillaTilt {
   }
 
   getValues() {
-    let x = (this.event.clientX - this.left) / this.width;
-    let y = (this.event.clientY - this.top) / this.height;
+    let tiltX = 0;
+    let tiltY = 0;
+    let x = 0;
+    let y = 0;
 
-    x = Math.min(Math.max(x, 0), 1);
-    y = Math.min(Math.max(y, 0), 1);
+    if (this.event){
+      x = (this.event.clientX - this.left) / this.width;
+      y = (this.event.clientY - this.top) / this.height;
+      x = Math.min(Math.max(x, 0), 1);
+      y = Math.min(Math.max(y, 0), 1);
+      tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
+      tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    } else {
+      tiltX = this.settings.startY;
+      tiltY = this.settings.startX;
+    }
 
-    let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
-    let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
-    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
+    x = Math.abs(tiltX / this.settings.max);
+    y = Math.abs(tiltY / this.settings.max);
+    let angle = Math.atan2(x, -y) * (180 / Math.PI);
 
     return {
       tiltX: tiltX,
@@ -333,6 +345,7 @@ export default class VanillaTilt {
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
+   * @param {tiltX} settings.tiltX - the starting tilt on the X axis
    */
   extendSettings(settings) {
     let defaultSettings = {
@@ -354,6 +367,8 @@ export default class VanillaTilt {
       gyroscopeMaxAngleX: 45,
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45,
+      startX: 0,
+      startY: 0
     };
 
     let newSettings = {};
