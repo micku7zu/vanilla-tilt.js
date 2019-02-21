@@ -345,7 +345,8 @@ export default class VanillaTilt {
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
-   * @param {tiltX} settings.tiltX - the starting tilt on the X axis
+   * @param {tiltX} settings.tiltX - the starting tilt on the X axis, in degrees
+   * @param {tiltY} settings.tiltY - the starting tilt on the Y axis, in degrees
    */
   extendSettings(settings) {
     let defaultSettings = {
