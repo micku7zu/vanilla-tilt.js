@@ -87,10 +87,7 @@ npm install vanilla-tilt
 
 #### Typings
 
-Installing typings using npm
-```
-npm install @types/vanilla-tilt
-```
+Typings were out of date in the previous version, so I've rolled a copy directly into the application for you would be Typescript junkies!
 
 ### Credits
 
