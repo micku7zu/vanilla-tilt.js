@@ -35,7 +35,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
                                     // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
     "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
-    "full-page-listening":  false,  // If true, parallax effect will listen to mouse mouse events on the whole document, not only the selected element
+    "full-page-listening":  false,  // If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
     gyroscope:              true,   // Boolean to enable/disable device orientation detection,
     gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
     gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
