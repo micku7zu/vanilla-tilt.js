@@ -32,6 +32,7 @@ class VanillaTilt {
 
     this.glare = this.isSettingTrue(this.settings.glare);
     this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
+    this.fullPageListening = this.isSettingTrue(this.settings["full-page-listening"]);
     this.gyroscope = this.isSettingTrue(this.settings.gyroscope);
 
     if (this.glare) {
@@ -79,8 +80,13 @@ class VanillaTilt {
     this.onDeviceOrientationBind = this.onDeviceOrientation.bind(this);
 
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
-    this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
+
+    if (this.fullPageListening) {
+        window.document.addEventListener("mousemove", this.onMouseMoveBind);
+    } else {
+        this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
+    }
 
     if (this.glare) {
       window.addEventListener("resize", this.onWindowResizeBind);
@@ -96,10 +102,15 @@ class VanillaTilt {
    */
   removeEventListeners() {
     this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
-    this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
     this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
 
-    if(this.gyroscope) {
+    if (this.fullPageListening) {
+        window.document.removeEventListener("mousemove", this.onMouseMoveBind);
+    } else {
+        this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
+    }
+
+    if (this.gyroscope) {
       window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
     }
 
@@ -132,7 +143,7 @@ class VanillaTilt {
 
     const totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
     const totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
-    
+
     const degreesPerPixelX = totalAngleX / this.width;
     const degreesPerPixelY = totalAngleY / this.height;
 
@@ -170,6 +181,8 @@ class VanillaTilt {
   }
 
   onMouseLeave() {
+    if (this.fullPageListening) { return; }
+
     this.setTransition();
 
     if (this.settings.reset) {
@@ -197,8 +210,13 @@ class VanillaTilt {
   }
 
   getValues() {
-    let x = (this.event.clientX - this.left) / this.width;
-    let y = (this.event.clientY - this.top) / this.height;
+    if (this.fullPageListening) {
+        var x = this.event.clientX / document.body.clientWidth;
+        var y = this.event.clientY / document.body.clientHeight;
+    } else {
+        var x = (this.event.clientX - this.left) / this.width;
+        var y = (this.event.clientY - this.top) / this.height;
+    }
 
     x = Math.min(Math.max(x, 0), 1);
     y = Math.min(Math.max(y, 0), 1);
@@ -350,6 +368,7 @@ class VanillaTilt {
       glare: false,
       "max-glare": 1,
       "glare-prerender": false,
+      "full-page-listening": false,
       "mouse-event-element": null,
       reset: true,
       gyroscope: true,
