@@ -11,7 +11,7 @@ var classCallCheck = function (instance, Constructor) {
  * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.6.1
+ * Version 1.6.2
  */
 
 var VanillaTilt = function () {
@@ -27,6 +27,12 @@ var VanillaTilt = function () {
     this.height = null;
     this.left = null;
     this.top = null;
+
+    this.gammazero = null;
+    this.betazero = null;
+    this.lastgammazero = null;
+    this.lastbetazero = null;
+
     this.transitionTimeout = null;
     this.updateCall = null;
 
@@ -43,6 +49,7 @@ var VanillaTilt = function () {
     this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
     this.fullPageListening = this.isSettingTrue(this.settings["full-page-listening"]);
     this.gyroscope = this.isSettingTrue(this.settings.gyroscope);
+    this.gyroscopeSamples = this.settings.gyroscopeSamples;
 
     if (this.glare) {
       this.prepareGlare();
@@ -156,14 +163,29 @@ var VanillaTilt = function () {
 
     this.updateElementPosition();
 
+    if (this.gyroscopeSamples > 0) {
+      this.lastgammazero = this.gammazero;
+      this.lastbetazero = this.betazero;
+
+      if (this.gammazero === null) {
+        this.gammazero = event.gamma;
+        this.betazero = event.beta;
+      } else {
+        this.gammazero = (event.gamma + this.lastgammazero) / 2;
+        this.betazero = (event.beta + this.lastbetazero) / 2;
+      }
+
+      this.gyroscopeSamples -= 1;
+    }
+
     var totalAngleX = this.settings.gyroscopeMaxAngleX - this.settings.gyroscopeMinAngleX;
     var totalAngleY = this.settings.gyroscopeMaxAngleY - this.settings.gyroscopeMinAngleY;
 
     var degreesPerPixelX = totalAngleX / this.width;
     var degreesPerPixelY = totalAngleY / this.height;
 
-    var angleX = event.gamma - this.settings.gyroscopeMinAngleX;
-    var angleY = event.beta - this.settings.gyroscopeMinAngleY;
+    var angleX = event.gamma - (this.settings.gyroscopeMinAngleX + this.gammazero);
+    var angleY = event.beta - (this.settings.gyroscopeMinAngleY + this.betazero);
 
     var posX = angleX / degreesPerPixelX;
     var posY = angleY / degreesPerPixelY;
@@ -224,12 +246,15 @@ var VanillaTilt = function () {
   };
 
   VanillaTilt.prototype.getValues = function getValues() {
+    var x = void 0,
+        y = void 0;
+
     if (this.fullPageListening) {
-      var x = this.event.clientX / document.body.clientWidth;
-      var y = this.event.clientY / document.body.clientHeight;
+      x = this.event.clientX / document.body.clientWidth;
+      y = this.event.clientY / document.body.clientHeight;
     } else {
-      var x = (this.event.clientX - this.left) / this.width;
-      var y = (this.event.clientY - this.top) / this.height;
+      x = (this.event.clientX - this.left) / this.width;
+      y = (this.event.clientY - this.top) / this.height;
     }
 
     x = Math.min(Math.max(x, 0), 1);
@@ -364,10 +389,12 @@ var VanillaTilt = function () {
    * @param {boolean} settings.glare - What axis should be disabled. Can be X or Y
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
+   * @param {boolean} settings.full-page-listening - If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
+   * @param {gyroscopeSamples} settings.gyroscopeSamples - How many gyroscope moves to decide the starting position.
    */
 
 
@@ -391,7 +418,8 @@ var VanillaTilt = function () {
       gyroscopeMinAngleX: -45,
       gyroscopeMaxAngleX: 45,
       gyroscopeMinAngleY: -45,
-      gyroscopeMaxAngleY: 45
+      gyroscopeMaxAngleY: 45,
+      gyroscopeSamples: 10
     };
 
     var newSettings = {};

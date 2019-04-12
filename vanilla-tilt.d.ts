@@ -1,4 +1,4 @@
-// Extended Type definitions for vanilla-tilt 1.6.1
+// Extended Type definitions for vanilla-tilt 1.6.2
 // Project: https://github.com/micku7zu/vanilla-tilt.js
 // Definitions by: Livio Brunner <https://github.com/BrunnerLivio>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -57,6 +57,9 @@ export interface TiltOptions {
    */
   "glare-prerender"?: boolean;
 
+  // If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
+  "full-page-listening"?: boolean;
+
   // Boolean to enable/disable device orientation detection,
   gyroscope?: boolean;
 
@@ -82,6 +85,9 @@ export interface TiltOptions {
   // meaning that a device rotated at this angle would tilt the element as if
   // the mouse was on the bottom border of the element;
   gyroscopeMaxAngleY?: number
+
+  //How many gyroscope moves to decide the starting position.
+  gyroscopeSamples?: number
 
 }
 

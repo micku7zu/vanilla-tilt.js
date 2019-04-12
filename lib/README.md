@@ -18,6 +18,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 </body>
 ```
 
+If you want to use this library in IE, you need to include a CustomEvent polyfill: https://github.com/micku7zu/vanilla-tilt.js/issues/49#issuecomment-482711876 or maybe consider the [jQuery version](https://github.com/gijsroge/tilt.js).
 ### Options
 ```js
 {
@@ -41,6 +42,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
     gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
     gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    gyroscopeSamples:       10      // How many gyroscope moves to decide the starting position.
 }
 ```
 
@@ -88,10 +90,7 @@ npm install vanilla-tilt
 
 #### Typings
 
-Installing typings using npm
-```
-npm install @types/vanilla-tilt
-```
+Typings were out of date in the previous version, so I've rolled a copy directly into the application for you would be Typescript junkies!
 
 ### Credits
 

@@ -42,6 +42,7 @@ If you want to use this library in IE, you need to include a CustomEvent polyfil
     gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
     gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
     gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    gyroscopeSamples:       10      // How many gyroscope moves to decide the starting position.
 }
 ```
 
@@ -86,10 +87,6 @@ Also available on npm https://www.npmjs.com/package/vanilla-tilt
 ```
 npm install vanilla-tilt
 ```
-
-#### Typings
-
-Typings were out of date in the previous version, so I've rolled a copy directly into the application for you would be Typescript junkies!
 
 ### Credits
 
