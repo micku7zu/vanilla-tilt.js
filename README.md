@@ -18,6 +18,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 </body>
 ```
 
+If you want to use this library in IE, you need to include a CustomEvent polyfill: https://github.com/micku7zu/vanilla-tilt.js/issues/49#issuecomment-482711876 or maybe consider the [jQuery version](https://github.com/gijsroge/tilt.js).
 ### Options
 ```js
 {
