@@ -18,6 +18,7 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 </body>
 ```
 
+If you want to use this library in IE, you need to include a CustomEvent polyfill: https://github.com/micku7zu/vanilla-tilt.js/issues/49#issuecomment-482711876 or maybe consider the [jQuery version](https://github.com/gijsroge/tilt.js).
 ### Options
 ```js
 {
@@ -28,18 +29,20 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     speed:                  300,    // Speed of the enter/exit transition
     transition:             true,   // Set a transition on enter/exit.
     axis:                   null,   // What axis should be disabled. Can be X or Y.
-    reset:                  true    // If the tilt effect has to be reset on exit.
+    reset:                  true,   // If the tilt effect has to be reset on exit.
     easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-    glare:                  false   // if it should have a "glare" effect
+    glare:                  false,  // if it should have a "glare" effect
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
     "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
                                     // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-    "mouse-event-element":  null    // css-selector or link to HTML-element what will be listen mouse events 
-    gyroscope:              true    // Boolean to enable/disable device orientation detection,
-    gyroscopeMinAngleX:     -45     // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
-    gyroscopeMaxAngleX:     45      // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
-    gyroscopeMinAngleY:     -45     // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
-    gyroscopeMaxAngleY:     45      // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
+    "full-page-listening":  false,  // If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
+    gyroscope:              true,   // Boolean to enable/disable device orientation detection,
+    gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
+    gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
+    gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
+    gyroscopeMaxAngleY:     45,     // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    gyroscopeSamples:       10      // How many gyroscope moves to decide the starting position.
 }
 ```
 
@@ -87,10 +90,7 @@ npm install vanilla-tilt
 
 #### Typings
 
-Installing typings using npm
-```
-npm install @types/vanilla-tilt
-```
+Typings were out of date in the previous version, so I've rolled a copy directly into the application for you would be Typescript junkies!
 
 ### Credits
 
@@ -103,6 +103,8 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 - [Livio Brunner](https://github.com/BrunnerLivio) <<a href="mailto:contact@brunnerliv.io">contact@brunnerliv.io</a>> (Typings & Glare Effect)
 - [Oleg Postoev](https://github.com/Dok11)
 - [Matteo Rigon](https://github.com/matteo-rigon) (Device orientation support)
+- [Corey Austin](https://github.com/lazyhummingbird) (Initial gyroscope position)
+- [rrroyal](https://github.com/rrroyal) (Whole document mouse events listening)
 
 ### License
 
