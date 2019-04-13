@@ -44,6 +44,7 @@ export default class VanillaTilt {
     }
 
     this.addEventListeners();
+    this.update();
   }
 
   isSettingTrue(setting) {
@@ -231,22 +232,26 @@ export default class VanillaTilt {
   }
 
   getValues() {
-    let x, y;
+    let tiltX = 0;
+    let tiltY = 0;
+    let x = 0;
+    let y = 0;
 
-    if (this.fullPageListening) {
-      x = this.event.clientX / document.body.clientWidth;
-      y = this.event.clientY / document.body.clientHeight;
-    } else {
+    if (this.event){
       x = (this.event.clientX - this.left) / this.width;
       y = (this.event.clientY - this.top) / this.height;
+      x = Math.min(Math.max(x, 0), 1);
+      y = Math.min(Math.max(y, 0), 1);
+      tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
+      tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    } else {
+      tiltX = this.settings.startY;
+      tiltY = this.settings.startX;
     }
 
-    x = Math.min(Math.max(x, 0), 1);
-    y = Math.min(Math.max(y, 0), 1);
-
-    let tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
-    let tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
-    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
+    x = Math.abs(tiltX / this.settings.max);
+    y = Math.abs(tiltY / this.settings.max);
+    let angle = Math.atan2(x, -y) * (180 / Math.PI);
 
     return {
       tiltX: tiltX,
@@ -378,6 +383,8 @@ export default class VanillaTilt {
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
+   * @param {tiltX} settings.tiltX - the starting tilt on the X axis, in degrees
+   * @param {tiltY} settings.tiltY - the starting tilt on the Y axis, in degrees
    * @param {gyroscopeSamples} settings.gyroscopeSamples - How many gyroscope moves to decide the starting position.
    */
   extendSettings(settings) {
@@ -401,6 +408,8 @@ export default class VanillaTilt {
       gyroscopeMaxAngleX: 45,
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45,
+      startX: 0,
+      startY: 0,
       gyroscopeSamples: 10
     };
 
