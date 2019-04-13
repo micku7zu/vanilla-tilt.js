@@ -13,13 +13,13 @@
 
 <aside>
     <a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo" id="logo" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.5" data-tilt-speed="400"
-       data-tilt-scale="1.1" data-tilt-max="20" data-tilt-perspective="500">
+       data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500">
         <span>vanilla-tilt.js</span>
     </a>
     <h3>Credits </h3>
     <h6>Original idea and author:</h6>
     <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.8" data-tilt-speed="400"
-       data-tilt-scale="1.1" data-tilt-max="20" data-tilt-perspective="500">
+       data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500">
         <span>tilt.js</span>
     </a>
     <br>
@@ -49,7 +49,7 @@
     <section>
         <a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo mobileLogo" id="logo" data-tilt
            data-tilt-speed="400"
-           data-tilt-scale="1.1" data-tilt-max="20" data-tilt-perspective="500">
+           data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500">
             <span>vanilla-tilt.js</span>
         </a>
         <p>
@@ -80,25 +80,25 @@
         <br>
         <h3>Download</h3>
         <div>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.js" data-tilt data-tilt-max="40">
+            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.js" data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.js
                     <br> <span>~ 6kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.min.js" data-tilt data-tilt-max="40">
+            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.min.js" data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.min.js
                     <br> <span>~ 3.5kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.js" data-tilt data-tilt-max="40">
+            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.js" data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.babel.js
                     <br> <span>~ 8.5kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.min.js" data-tilt data-tilt-max="40">
+            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.min.js" data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.babel.min.js
                     <br> <span>~ 4.5kb</span>
@@ -120,6 +120,8 @@
             <pre><code class="language-javascript">{
     reverse:                false,  // reverse the tilt direction
     max:                    35,     // max tilt rotation (degrees)
+    startX:                 0,      // the starting tilt on the X axis, in degrees.
+    startY:                 0,      // the starting tilt on the Y axis, in degrees.
     perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
     scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
     speed:                  300,    // Speed of the enter/exit transition
@@ -242,6 +244,16 @@
             <pre><code class="language-markup">&lt;div data-tilt data-tilt-scale="1.1"&gt;&lt;/div&gt;</code></pre>
         </div>
     </section>
+
+    <section class="example">
+        <div class="box" data-tilt data-tilt-startX="-25" data-tilt-startY="-25" data-tilt-max="25"></div>
+        <div class="info">
+            <h3>Start tilt position</h3>
+            <p>Setting this option will tilt the element at specific degrees at page load.</p>
+            <pre><code class="language-markup">&lt;div data-tilt data-tilt-startX="20" data-tilt-startY="-20"&gt;&lt;/div&gt;</code></pre>
+        </div>
+    </section>
+
     <section class="example">
         <div class="box" data-tilt data-tilt-axis="y"></div>
         <div class="info">
@@ -298,7 +310,7 @@ eventBox.addEventListener("tiltChange", function (event) {
     </section>
     <section class="example mobileCredits">
         <div class="box" id="box-event" style="background:transparent;">
-            <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt="" data-tilt-speed="400" data-tilt-scale="1.1" data-tilt-max="20" data-tilt-perspective="500" style="will-change: transform; transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
+            <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt="" data-tilt-speed="400" data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500" style="will-change: transform; transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
                 <span>tilt.js</span>
             </a>
         </div>
