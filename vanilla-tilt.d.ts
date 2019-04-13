@@ -1,4 +1,4 @@
-// Extended Type definitions for vanilla-tilt 1.6.2
+// Extended Type definitions for vanilla-tilt 1.6.3
 // Project: https://github.com/micku7zu/vanilla-tilt.js
 // Definitions by: Livio Brunner <https://github.com/BrunnerLivio>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -15,6 +15,17 @@ export interface TiltOptions {
    * Max tilt rotation (degrees)
    */
   max?: number;
+
+  /**
+   * Starting X tilt rotation (degrees)
+   */
+  startX?: number;
+
+  /**
+   * Starting Y tilt rotation (degrees)
+   */
+  startY?: number;
+
   /**
    * Transform perspective, the lower the more extreme the tilt gets.
    */

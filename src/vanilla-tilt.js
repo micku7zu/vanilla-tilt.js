@@ -1,8 +1,8 @@
 /**
- * Created by Șandor Sergiu (micku7zu) on 1/27/2017.
+ * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.6.2
+ * Version 1.6.3
  */
 
 export default class VanillaTilt {
@@ -16,6 +16,7 @@ export default class VanillaTilt {
     this.left = null;
     this.top = null;
 
+    // for Gyroscope sampling
     this.gammazero = null;
     this.betazero = null;
     this.lastgammazero = null;
@@ -23,6 +24,7 @@ export default class VanillaTilt {
 
     this.transitionTimeout = null;
     this.updateCall = null;
+    this.event = null;
 
     this.updateBind = this.update.bind(this);
     this.resetBind = this.reset.bind(this);
@@ -33,10 +35,10 @@ export default class VanillaTilt {
 
     this.reverse = this.settings.reverse ? -1 : 1;
 
-    this.glare = this.isSettingTrue(this.settings.glare);
-    this.glarePrerender = this.isSettingTrue(this.settings["glare-prerender"]);
-    this.fullPageListening = this.isSettingTrue(this.settings["full-page-listening"]);
-    this.gyroscope = this.isSettingTrue(this.settings.gyroscope);
+    this.glare = VanillaTilt.isSettingTrue(this.settings.glare);
+    this.glarePrerender = VanillaTilt.isSettingTrue(this.settings["glare-prerender"]);
+    this.fullPageListening = VanillaTilt.isSettingTrue(this.settings["full-page-listening"]);
+    this.gyroscope = VanillaTilt.isSettingTrue(this.settings.gyroscope);
     this.gyroscopeSamples = this.settings.gyroscopeSamples;
 
     if (this.glare) {
@@ -44,10 +46,10 @@ export default class VanillaTilt {
     }
 
     this.addEventListeners();
-    this.update();
+    this.updateInitialPosition();
   }
 
-  isSettingTrue(setting) {
+  static isSettingTrue(setting) {
     return setting === "" || setting === true || setting === 1;
   }
 
@@ -214,8 +216,8 @@ export default class VanillaTilt {
 
   reset() {
     this.event = {
-      pageX: this.left + this.width / 2,
-      pageY: this.top + this.height / 2
+      clientX: this.left + this.width / 2,
+      clientY: this.top + this.height / 2
     };
 
     if (this.element && this.element.style) {
@@ -225,33 +227,60 @@ export default class VanillaTilt {
         `scale3d(1, 1, 1)`;
     }
 
+    this.resetGlare();
+  }
+
+  resetGlare() {
     if (this.glare) {
       this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)";
       this.glareElement.style.opacity = "0";
     }
   }
 
-  getValues() {
-    let tiltX = 0;
-    let tiltY = 0;
-    let x = 0;
-    let y = 0;
-
-    if (this.event){
-      x = (this.event.clientX - this.left) / this.width;
-      y = (this.event.clientY - this.top) / this.height;
-      x = Math.min(Math.max(x, 0), 1);
-      y = Math.min(Math.max(y, 0), 1);
-      tiltX = (this.reverse * (this.settings.max / 2 - x * this.settings.max)).toFixed(2);
-      tiltY = (this.reverse * (y * this.settings.max - this.settings.max / 2)).toFixed(2);
-    } else {
-      tiltX = this.settings.startY;
-      tiltY = this.settings.startX;
+  updateInitialPosition() {
+    if (this.settings.startX === 0 && this.settings.startY === 0) {
+      return;
     }
 
-    x = Math.abs(tiltX / this.settings.max);
-    y = Math.abs(tiltY / this.settings.max);
-    let angle = Math.atan2(x, -y) * (180 / Math.PI);
+    this.onMouseEnter();
+
+    if (this.fullPageListening) {
+      this.event = {
+        clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * document.body.clientWidth,
+        clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * document.body.clientHeight
+      };
+    } else {
+      this.event = {
+        clientX: this.left + ((this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.width),
+        clientY: this.top + ((this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.height)
+      };
+    }
+
+
+    let backupScale = this.settings.scale;
+    this.settings.scale = 1;
+    this.update();
+    this.settings.scale = backupScale;
+    this.resetGlare();
+  }
+
+  getValues() {
+    let x, y;
+
+    if (this.fullPageListening) {
+      x = this.event.clientX / document.body.clientWidth;
+      y = this.event.clientY / document.body.clientHeight;
+    } else {
+      x = (this.event.clientX - this.left) / this.width;
+      y = (this.event.clientY - this.top) / this.height;
+    }
+
+    x = Math.min(Math.max(x, 0), 1);
+    y = Math.min(Math.max(y, 0), 1);
+
+    let tiltX = (this.reverse * (this.settings.max - x * this.settings.max * 2)).toFixed(2);
+    let tiltY = (this.reverse * (y * this.settings.max * 2 - this.settings.max)).toFixed(2);
+    let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
 
     return {
       tiltX: tiltX,
@@ -369,12 +398,14 @@ export default class VanillaTilt {
    * Method return patched settings of instance
    * @param {boolean} settings.reverse - reverse the tilt direction
    * @param {number} settings.max - max tilt rotation (degrees)
+   * @param {startX} settings.startX - the starting tilt on the X axis, in degrees. Default: 0
+   * @param {startY} settings.startY - the starting tilt on the Y axis, in degrees. Default: 0
    * @param {number} settings.perspective - Transform perspective, the lower the more extreme the tilt gets
    * @param {string} settings.easing - Easing on enter/exit
    * @param {number} settings.scale - 2 = 200%, 1.5 = 150%, etc..
    * @param {number} settings.speed - Speed of the enter/exit transition
    * @param {boolean} settings.transition - Set a transition on enter/exit
-   * @param settings.axis - What axis should be disabled. Can be X or Y
+   * @param {string|null} settings.axis - What axis should be disabled. Can be X or Y
    * @param {boolean} settings.glare - What axis should be disabled. Can be X or Y
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
@@ -383,14 +414,14 @@ export default class VanillaTilt {
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
-   * @param {tiltX} settings.tiltX - the starting tilt on the X axis, in degrees
-   * @param {tiltY} settings.tiltY - the starting tilt on the Y axis, in degrees
    * @param {gyroscopeSamples} settings.gyroscopeSamples - How many gyroscope moves to decide the starting position.
    */
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
-      max: 35,
+      max: 15,
+      startX: 0,
+      startY: 0,
       perspective: 1000,
       easing: "cubic-bezier(.03,.98,.52,.99)",
       scale: 1,
@@ -408,8 +439,6 @@ export default class VanillaTilt {
       gyroscopeMaxAngleX: 45,
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45,
-      startX: 0,
-      startY: 0,
       gyroscopeSamples: 10
     };
 

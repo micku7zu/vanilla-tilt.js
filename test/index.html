@@ -8,8 +8,16 @@
   <style>
     html, body {
       width: 100%;
+      height: 100%;
       margin: 0;
       padding: 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     a {
@@ -23,9 +31,6 @@
       width: 100%;
       max-width: 200px;
       height: 200px;
-
-      margin: 0px auto;
-      margin-top: 50px;
 
       line-height: 200px;
       text-align: center;
@@ -116,9 +121,16 @@
 </head>
 <body>
 
-<a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo" id="logo" data-tilt data-tilt-glare="true"
-   data-tilt-max-glare="0.5" data-tilt-speed="400"
-   data-tilt-scale="1.1" data-tilt-max="20" data-tilt-perspective="500">
+<a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo" id="logo"
+   data-tilt data-tilt-glare="true"
+   data-tilt-max-glare="0.5"
+   data-tilt-speed="400"
+   data-tilt-scale="1.1"
+   data-tilt-perspective="500"
+   data-tilt-max="15"
+   data-tilt-startX="15"
+   data-tilt-startY="10"
+>
   <span>vanilla-tilt.js</span>
 </a>
 

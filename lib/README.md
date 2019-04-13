@@ -88,10 +88,6 @@ Also available on npm https://www.npmjs.com/package/vanilla-tilt
 npm install vanilla-tilt
 ```
 
-#### Typings
-
-Typings were out of date in the previous version, so I've rolled a copy directly into the application for you would be Typescript junkies!
-
 ### Credits
 
 Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
@@ -104,6 +100,7 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 - [Oleg Postoev](https://github.com/Dok11)
 - [Matteo Rigon](https://github.com/matteo-rigon) (Device orientation support)
 - [Corey Austin](https://github.com/lazyhummingbird) (Initial gyroscope position)
+- [Sander Moolin](https://github.com/SaFrMo)
 - [rrroyal](https://github.com/rrroyal) (Whole document mouse events listening)
 
 ### License
