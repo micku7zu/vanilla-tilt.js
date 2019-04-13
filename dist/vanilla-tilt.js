@@ -5,7 +5,7 @@ var VanillaTilt = (function () {
  * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.6.3
+ * Version 1.7.0
  */
 
 class VanillaTilt {
@@ -16,6 +16,8 @@ class VanillaTilt {
 
     this.width = null;
     this.height = null;
+    this.clientWidth = null;
+    this.clientHeight = null;
     this.left = null;
     this.top = null;
 
@@ -34,18 +36,22 @@ class VanillaTilt {
 
     this.element = element;
     this.settings = this.extendSettings(settings);
-    this.elementListener = this.getElementListener();
 
     this.reverse = this.settings.reverse ? -1 : 1;
-
     this.glare = VanillaTilt.isSettingTrue(this.settings.glare);
     this.glarePrerender = VanillaTilt.isSettingTrue(this.settings["glare-prerender"]);
     this.fullPageListening = VanillaTilt.isSettingTrue(this.settings["full-page-listening"]);
     this.gyroscope = VanillaTilt.isSettingTrue(this.settings.gyroscope);
     this.gyroscopeSamples = this.settings.gyroscopeSamples;
 
+    this.elementListener = this.getElementListener();
+
     if (this.glare) {
       this.prepareGlare();
+    }
+
+    if (this.fullPageListening) {
+      this.updateClientSize();
     }
 
     this.addEventListeners();
@@ -61,8 +67,8 @@ class VanillaTilt {
    * @return {Node}
    */
   getElementListener() {
-    if (!this.settings || !this.settings["mouse-event-element"]) {
-      return this.element;
+    if (this.fullPageListening) {
+      return window.document;
     }
 
     if (typeof this.settings["mouse-event-element"] === "string") {
@@ -76,6 +82,8 @@ class VanillaTilt {
     if (this.settings["mouse-event-element"] instanceof Node) {
       return this.settings["mouse-event-element"];
     }
+
+    return this.element;
   }
 
   /**
@@ -91,14 +99,9 @@ class VanillaTilt {
 
     this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
+    this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
 
-    if (this.fullPageListening) {
-      window.document.addEventListener("mousemove", this.onMouseMoveBind);
-    } else {
-      this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
-    }
-
-    if (this.glare) {
+    if (this.glare || this.fullPageListening) {
       window.addEventListener("resize", this.onWindowResizeBind);
     }
 
@@ -113,18 +116,13 @@ class VanillaTilt {
   removeEventListeners() {
     this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
     this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
-
-    if (this.fullPageListening) {
-      window.document.removeEventListener("mousemove", this.onMouseMoveBind);
-    } else {
-      this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
-    }
+    this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
 
     if (this.gyroscope) {
       window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
     }
 
-    if (this.glare) {
+    if (this.glare || this.fullPageListening) {
       window.removeEventListener("resize", this.onWindowResizeBind);
     }
   }
@@ -206,10 +204,6 @@ class VanillaTilt {
   }
 
   onMouseLeave() {
-    if (this.fullPageListening) {
-      return;
-    }
-
     this.setTransition();
 
     if (this.settings.reset) {
@@ -249,8 +243,8 @@ class VanillaTilt {
 
     if (this.fullPageListening) {
       this.event = {
-        clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * document.body.clientWidth,
-        clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * document.body.clientHeight
+        clientX: (this.settings.startX + this.settings.max) / (2 * this.settings.max) * this.clientWidth,
+        clientY: (this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.clientHeight
       };
     } else {
       this.event = {
@@ -271,8 +265,8 @@ class VanillaTilt {
     let x, y;
 
     if (this.fullPageListening) {
-      x = this.event.clientX / document.body.clientWidth;
-      y = this.event.clientY / document.body.clientHeight;
+      x = this.event.clientX / this.clientWidth;
+      y = this.event.clientY / this.clientHeight;
     } else {
       x = (this.event.clientX - this.left) / this.width;
       y = (this.event.clientY - this.top) / this.height;
@@ -373,14 +367,27 @@ class VanillaTilt {
   }
 
   updateGlareSize() {
-    Object.assign(this.glareElement.style, {
-      "width": `${this.element.offsetWidth * 2}`,
-      "height": `${this.element.offsetWidth * 2}`,
-    });
+    if (this.glare) {
+      Object.assign(this.glareElement.style, {
+        "width": `${this.element.offsetWidth * 2}`,
+        "height": `${this.element.offsetWidth * 2}`,
+      });
+    }
+  }
+
+  updateClientSize() {
+    this.clientWidth = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
+
+    this.clientHeight = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
   }
 
   onWindowResize() {
     this.updateGlareSize();
+    this.updateClientSize();
   }
 
   setTransition() {
