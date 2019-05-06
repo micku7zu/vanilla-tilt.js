@@ -89,6 +89,9 @@ Also available on npm https://www.npmjs.com/package/vanilla-tilt
 npm install vanilla-tilt
 ```
 
+### Known issues
+- [Getting weird rendering issues on Safari](https://github.com/micku7zu/vanilla-tilt.js/issues/22)
+
 ### Credits
 
 Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
