@@ -295,16 +295,23 @@ export default class VanillaTilt {
   }
 
   update() {
-    let values = this.getValues();
+    const hovered = [].slice
+        .call(this.element.parentElement.querySelectorAll(':hover'))
+        .includes(this.element),
+      values = this.getValues(),
+      scale = hovered ? this.settings.scale : 1,
+      glareOpacity = hovered
+        ? (values.percentageY * this.settings['max-glare']) / 100
+        : 0;
 
     this.element.style.transform = "perspective(" + this.settings.perspective + "px) " +
       "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
       "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-      "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")";
+      "scale3d(" + scale + ", " + scale + ", " + scale + ")";
 
     if (this.glare) {
       this.glareElement.style.transform = `rotate(${values.angle}deg) translate(-50%, -50%)`;
-      this.glareElement.style.opacity = `${values.percentageY * this.settings["max-glare"] / 100}`;
+      this.glareElement.style.opacity = `${glareOpacity}`;
     }
 
     this.element.dispatchEvent(new CustomEvent("tiltChange", {
