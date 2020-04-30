@@ -22,7 +22,7 @@ If you want to use this library in IE, you need to include a CustomEvent polyfil
 ```js
 {
     reverse:                false,  // reverse the tilt direction
-    max:                    35,     // max tilt rotation (degrees)
+    max:                    15,     // max tilt rotation (degrees)
     startX:                 0,      // the starting tilt on the X axis, in degrees.
     startY:                 0,      // the starting tilt on the Y axis, in degrees.
     perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
