@@ -103,7 +103,7 @@ export default class VanillaTilt {
     }
 
     if (this.gyroscope) {
-      window.addEventListener("deviceorientation", this.onDeviceOrientationBind);
+      window.addEventListener("device-orientation", this.onDeviceOrientationBind); /* Make device-orientation readable */
     }
   }
 
