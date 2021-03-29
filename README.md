@@ -10,6 +10,8 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
 
 ```html
 <body>
+  
+<!-- your markup element -->
 <div class="your-element" data-tilt></div>
 
 <!-- at the end of the body -->
