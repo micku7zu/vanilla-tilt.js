@@ -102,6 +102,7 @@ h3:first-child {
     display: block;
     -webkit-transform: translateZ(50px) scale(0.7);
     transform: translateZ(50px) scale(0.7);
+    white-space: nowrap;
 }
 
 .logo > span:after {
@@ -428,13 +429,16 @@ aside ul a:hover {
     text-decoration: underline;
 }
 
+@media only screen and (max-width: 1670px) {
+    .logo span {
+        font-size: 2vw;
+    }
+}
+
 @media only screen and (max-width: 1070px) {
     .logo {
         max-height: 200px;
         line-height: 200px;
-    }
-    .logo span {
-        font-size: 20px;
     }
 }
 
