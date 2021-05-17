@@ -91,6 +91,12 @@ Also available on npm https://www.npmjs.com/package/vanilla-tilt
 npm install vanilla-tilt
 ```
 
+Import it using
+
+```
+import VanillaTilt from 'vanilla-tilt';
+```
+
 ### Known issues
 - [Getting weird rendering issues on Safari](https://github.com/micku7zu/vanilla-tilt.js/issues/22)
 
