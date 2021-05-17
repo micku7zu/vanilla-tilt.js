@@ -90,6 +90,12 @@ Also available on npm https://www.npmjs.com/package/vanilla-tilt
 npm install vanilla-tilt
 ```
 
+Import it using
+
+```
+import VanillaTilt from 'vanilla-tilt';
+```
+
 ### Credits
 
 Original library: [Tilt.js](http://gijsroge.github.io/tilt.js/)
