@@ -350,14 +350,15 @@ export default class VanillaTilt {
       "pointer-events": "none"
     });
 
+    const glareSize = (this.element.offsetWidth > this.element.offsetHeight ? this.element.offsetWidth : this.element.offsetHeight) * 2;
     Object.assign(this.glareElement.style, {
       "position": "absolute",
       "top": "50%",
       "left": "50%",
       "pointer-events": "none",
       "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
-      "width": `${this.element.offsetWidth * 2}px`,
-      "height": `${this.element.offsetWidth * 2}px`,
+      "width": `${glareSize}px`,
+      "height": `${glareSize}px`,
       "transform": "rotate(180deg) translate(-50%, -50%)",
       "transform-origin": "0% 0%",
       "opacity": "0",
@@ -366,9 +367,10 @@ export default class VanillaTilt {
 
   updateGlareSize() {
     if (this.glare) {
+      const glareSize = (this.element.offsetWidth > this.element.offsetHeight ? this.element.offsetWidth : this.element.offsetHeight) * 2;
       Object.assign(this.glareElement.style, {
-        "width": `${this.element.offsetWidth * 2}`,
-        "height": `${this.element.offsetWidth * 2}`,
+        "width": `${glareSize}`,
+        "height": `${glareSize}`,
       });
     }
   }
