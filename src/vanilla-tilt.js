@@ -2,7 +2,7 @@
  * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.7.1
+ * Version 1.7.2
  */
 
 export default class VanillaTilt {
@@ -350,27 +350,27 @@ export default class VanillaTilt {
       "pointer-events": "none"
     });
 
-    const glareSize = (this.element.offsetWidth > this.element.offsetHeight ? this.element.offsetWidth : this.element.offsetHeight) * 2;
     Object.assign(this.glareElement.style, {
       "position": "absolute",
       "top": "50%",
       "left": "50%",
       "pointer-events": "none",
       "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
-      "width": `${glareSize}px`,
-      "height": `${glareSize}px`,
       "transform": "rotate(180deg) translate(-50%, -50%)",
       "transform-origin": "0% 0%",
       "opacity": "0",
     });
+
+    this.updateGlareSize();
   }
 
   updateGlareSize() {
     if (this.glare) {
       const glareSize = (this.element.offsetWidth > this.element.offsetHeight ? this.element.offsetWidth : this.element.offsetHeight) * 2;
+
       Object.assign(this.glareElement.style, {
-        "width": `${glareSize}`,
-        "height": `${glareSize}`,
+        "width": `${glareSize}px`,
+        "height": `${glareSize}px`,
       });
     }
   }
