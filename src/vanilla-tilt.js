@@ -260,7 +260,7 @@ export default class VanillaTilt {
   }
 
   getValues() {
-    let x, y, maxTiltX, maxTiltY;
+    let x, y;
 
     if (this.fullPageListening) {
       x = this.event.clientX / this.clientWidth;
@@ -273,16 +273,8 @@ export default class VanillaTilt {
     x = Math.min(Math.max(x, 0), 1);
     y = Math.min(Math.max(y, 0), 1);
 
-    if(this.settings.unit == "px") {
-      maxTiltX = Math.asin(this.settings.max / (this.width / 2)) * (180/Math.PI);
-      maxTiltY = Math.asin(this.settings.max / (this.width / 2)) * (180/Math.PI);
-    } else {
-      maxTiltX = this.settings.max;
-      maxTiltY = this.settings.max;
-    }
-
-    let tiltX = (this.reverse * (maxTiltX - x * maxTiltX * 2)).toFixed(2);
-    let tiltY = (this.reverse * (y * maxTiltY * 2 - maxTiltY)).toFixed(2);
+    let tiltX = (this.reverse * (this.settings.max - x * this.settings.max * 2)).toFixed(2);
+    let tiltY = (this.reverse * (y * this.settings.max * 2 - this.settings.max)).toFixed(2);
     let angle = Math.atan2(this.event.clientX - (this.left + this.width / 2), -(this.event.clientY - (this.top + this.height / 2))) * (180 / Math.PI);
 
     return {
@@ -415,10 +407,9 @@ export default class VanillaTilt {
   /**
    * Method return patched settings of instance
    * @param {boolean} settings.reverse - reverse the tilt direction
-   * @param {boolean} settings.unit - unit for tilt values ("deg" or "px"). Default: "deg"
-   * @param {number} settings.max - max tilt rotation
-   * @param {startX} settings.startX - the starting tilt on the X axis Default: 0
-   * @param {startY} settings.startY - the starting tilt on the Y axis. Default: 0
+   * @param {number} settings.max - max tilt rotation (degrees)
+   * @param {startX} settings.startX - the starting tilt on the X axis, in degrees. Default: 0
+   * @param {startY} settings.startY - the starting tilt on the Y axis, in degrees. Default: 0
    * @param {number} settings.perspective - Transform perspective, the lower the more extreme the tilt gets
    * @param {string} settings.easing - Easing on enter/exit
    * @param {number} settings.scale - 2 = 200%, 1.5 = 150%, etc..
@@ -438,7 +429,6 @@ export default class VanillaTilt {
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
-      unit: "deg",
       max: 15,
       startX: 0,
       startY: 0,
