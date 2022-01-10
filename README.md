@@ -115,6 +115,11 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 - [Sander Moolin](https://github.com/SaFrMo)
 - [rrroyal](https://github.com/rrroyal) (Whole document mouse events listening)
 
+### Other projects
+
+#### [Quick Cursor: One-Handed mode](https://play.google.com/store/apps/details?id=com.quickcursor) (Android app)
+Play Store link: https://play.google.com/store/apps/details?id=com.quickcursor
+
 ### License
 
 MIT License
