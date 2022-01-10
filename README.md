@@ -120,6 +120,9 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 #### [Quick Cursor: One-Handed mode](https://play.google.com/store/apps/details?id=com.quickcursor) (Android app)
 Play Store link: https://play.google.com/store/apps/details?id=com.quickcursor
 
+### Buy me a beer 🍻
+If you want to thank me for vanilla-tilt.js or Quick Cursor Android app, you can [donate on PayPal](https://www.paypal.me/micku7zu?locale.x=en_US): https://www.paypal.me/micku7zu?locale.x=en_US
+
 ### License
 
 MIT License
