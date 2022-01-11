@@ -12,13 +12,15 @@
 <body>
 
 <aside>
-    <a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo" id="logo" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.5" data-tilt-speed="400"
+    <a href="https://github.com/micku7zu/vanilla-tilt.js" class="logo" id="logo" data-tilt data-tilt-glare="true"
+       data-tilt-max-glare="0.5" data-tilt-speed="400"
        data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500">
         <span>vanilla-tilt.js</span>
     </a>
     <h3>Credits </h3>
     <h6>Original idea and author:</h6>
-    <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.8" data-tilt-speed="400"
+    <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt data-tilt-glare="true"
+       data-tilt-max-glare="0.8" data-tilt-speed="400"
        data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500">
         <span>tilt.js</span>
     </a>
@@ -37,13 +39,21 @@
         <li>
             <a href="https://github.com/lazyhummingbird">Corey Austin</a>
         </li>
-	<li>
+        <li>
             <a href="https://github.com/SaFrMo">Sander Moolin</a>
         </li>
         <li>
             <a href="https://github.com/rrroyal">rrroyal</a>
         </li>
     </ul>
+    <br>
+    <h3>Other projects</h3>
+    <a href="https://play.google.com/store/apps/details?id=com.quickcursor" title="Quick Cursor Android app" target="_blank" id="quickcursor" data-tilt
+       data-tilt-glare="true" data-tilt-max-glare="0.8" data-tilt-speed="400" data-tilt-scale="1.1" data-tilt-max="10"
+       data-tilt-perspective="500">
+        <div id="quickcursor-logo"></div>
+    </a>
+    <h6>One-Handed mode for Android</h6>
 </aside>
 <main>
     <section>
@@ -80,25 +90,33 @@
         <br>
         <h3>Download</h3>
         <div>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.js" data-tilt data-tilt-max="20">
+            <a class="downloadBox"
+               href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.js" data-tilt
+               data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.js
                     <br> <span>~ 15kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.min.js" data-tilt data-tilt-max="20">
+            <a class="downloadBox"
+               href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.min.js"
+               data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.min.js
                     <br> <span>~ 8.5kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.js" data-tilt data-tilt-max="20">
+            <a class="downloadBox"
+               href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.js"
+               data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.babel.js
                     <br> <span>~ 16.5kb</span>
                 </div>
             </a>
-            <a class="downloadBox" href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.min.js" data-tilt data-tilt-max="20">
+            <a class="downloadBox"
+               href="https://raw.githubusercontent.com/micku7zu/vanilla-tilt.js/master/dist/vanilla-tilt.babel.min.js"
+               data-tilt data-tilt-max="20">
                 <div class="content">
                     <br> vanilla-tilt.babel.min.js
                     <br> <span>~ 9.5kb</span>
@@ -207,7 +225,9 @@
         <div class="box" data-tilt data-tilt-glare data-tilt-max-glare="0.8"></div>
         <div class="info">
             <h3>Glare effect</h3>
-            <p>Setting this option will enable a glare effect. You can tweak the glare value with <pre class="inline"><code class="language-markup">data-tilt-max-glare</code></pre></p>
+            <p>Setting this option will enable a glare effect. You can tweak the glare value with
+            <pre class="inline"><code class="language-markup">data-tilt-max-glare</code></pre>
+            </p>
             <pre><code class="language-markup">&lt;div data-tilt data-tilt-glare data-tilt-max-glare="0.8"&gt;&lt;/div&gt;</code></pre>
         </div>
     </section>
@@ -232,7 +252,8 @@
         <div class="info">
             <h3>Full page listening</h3>
             <p>Setting this option will make the element respond to any mouse movements on page.</p>
-            <pre><code class="language-markup">&lt;div data-tilt data-tilt-full-page-listening&gt;&lt;/div&gt;</code></pre>
+            <pre><code
+                    class="language-markup">&lt;div data-tilt data-tilt-full-page-listening&gt;&lt;/div&gt;</code></pre>
         </div>
     </section>
 
@@ -310,13 +331,17 @@ eventBox.addEventListener("tiltChange", function (event) {
     </section>
     <section class="example mobileCredits">
         <div class="box" id="box-event" style="background:transparent;">
-            <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt="" data-tilt-speed="400" data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500" style="will-change: transform; transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
+            <a href="http://gijsroge.github.io/tilt.js/" class="logo" id="logoJquery" data-tilt="" data-tilt-speed="400"
+               data-tilt-scale="1.1" data-tilt-max="10" data-tilt-perspective="500"
+               style="will-change: transform; transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
                 <span>tilt.js</span>
             </a>
         </div>
         <div class="info">
             <h3>jQuery Version</h3>
-            <p>vanilla-tilt.js is a fork of the original <a class="link" href="https://github.com/gijsroge/tilt.js" target="_blank">tilt.js jQuery version</a> by <a class="link" href="https://github.com/gijsroge" target="_blank">Gijs Rogé</a>.</p>
+            <p>vanilla-tilt.js is a fork of the original <a class="link" href="https://github.com/gijsroge/tilt.js"
+                                                            target="_blank">tilt.js jQuery version</a> by <a
+                    class="link" href="https://github.com/gijsroge" target="_blank">Gijs Rogé</a>.</p>
         </div>
         <div class="info">
             <h3>Contributors</h3>
@@ -330,7 +355,25 @@ eventBox.addEventListener("tiltChange", function (event) {
                 <li>
                     <a href="https://github.com/matteo-rigon">Matteo Rigon</a>
                 </li>
+                <li>
+                    <a href="https://github.com/lazyhummingbird">Corey Austin</a>
+                </li>
+                <li>
+                    <a href="https://github.com/SaFrMo">Sander Moolin</a>
+                </li>
+                <li>
+                    <a href="https://github.com/rrroyal">rrroyal</a>
+                </li>
             </ul>
+        </div>
+        <div class="info">
+            <h3>Other projects</h3>
+            <a style="margin:15px 0;" href="https://play.google.com/store/apps/details?id=com.quickcursor" title="Quick Cursor Android app" target="_blank" id="quickcursor" data-tilt
+               data-tilt-glare="true" data-tilt-max-glare="0.8" data-tilt-speed="400" data-tilt-scale="1.1" data-tilt-max="10"
+               data-tilt-perspective="500">
+                <div id="quickcursor-logo"></div>
+            </a>
+            <h6 style="margin-top:10px;">One-Handed mode for Android</h6>
         </div>
     </section>
 </main>
