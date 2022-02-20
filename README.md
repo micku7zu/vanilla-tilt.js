@@ -38,7 +38,7 @@ If you want to use this library in IE, you need to include a CustomEvent polyfil
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
     "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
                                     // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-    "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
+    "mouse-event-element":  null,   // css-selector or link to an HTML-element that will be listening to mouse events
     "full-page-listening":  false,  // If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
     gyroscope:              true,   // Boolean to enable/disable device orientation detection,
     gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
