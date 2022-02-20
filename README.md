@@ -28,17 +28,17 @@ A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https
     speed:                  300,    // Speed of the enter/exit transition
     transition:             true,   // Set a transition on enter/exit.
     axis:                   null,   // What axis should be disabled. Can be X or Y.
-    reset:                  true    // If the tilt effect has to be reset on exit.
+    reset:                  true,   // If the tilt effect has to be reset on exit.
     easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-    glare:                  false   // if it should have a "glare" effect
+    glare:                  false,  // if it should have a "glare" effect
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
     "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
-                               // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-    "mouse-event-element":  null    // css-selector or link to an HTML-element that will be listening to mouse events
-    gyroscope:              true    // Boolean to enable/disable device orientation detection,
-    gyroscopeMinAngleX:     -45     // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
-    gyroscopeMaxAngleX:     45      // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
-    gyroscopeMinAngleY:     -45     // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
+                                    // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+    "mouse-event-element":  null,   // css-selector or link to an HTML-element that will be listening to mouse events
+    gyroscope:              true,   // Boolean to enable/disable device orientation detection,
+    gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
+    gyroscopeMaxAngleX:     45,     // This is the top limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the right border of the element;
+    gyroscopeMinAngleY:     -45,    // This is the bottom limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the top border of the element;
     gyroscopeMaxAngleY:     45      // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
 
 }
