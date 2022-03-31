@@ -5,6 +5,11 @@
  * Version 1.7.2
  */
 
+/** Options used to bind passive event listeners. */
+const passiveEventListenerOptions = supportsPassiveEventListeners()
+  ? { passive: true }
+  : false;
+
 export default class VanillaTilt {
   constructor(element, settings = {}) {
     if (!(element instanceof Node)) {
@@ -86,7 +91,6 @@ export default class VanillaTilt {
 
   /**
    * Method set listen methods for this.elementListener
-   * @return {Node}
    */
   addEventListeners() {
     this.onMouseEnterBind = this.onMouseEnter.bind(this);
@@ -95,9 +99,9 @@ export default class VanillaTilt {
     this.onWindowResizeBind = this.onWindowResize.bind(this);
     this.onDeviceOrientationBind = this.onDeviceOrientation.bind(this);
 
-    this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind);
-    this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind);
-    this.elementListener.addEventListener("mousemove", this.onMouseMoveBind);
+    this.elementListener.addEventListener("mouseenter", this.onMouseEnterBind, passiveEventListenerOptions);
+    this.elementListener.addEventListener("mouseleave", this.onMouseLeaveBind, passiveEventListenerOptions);
+    this.elementListener.addEventListener("mousemove", this.onMouseMoveBind, passiveEventListenerOptions);
 
     if (this.glare || this.fullPageListening) {
       window.addEventListener("resize", this.onWindowResizeBind);
@@ -112,9 +116,9 @@ export default class VanillaTilt {
    * Method remove event listeners from current this.elementListener
    */
   removeEventListeners() {
-    this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind);
-    this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind);
-    this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind);
+    this.elementListener.removeEventListener("mouseenter", this.onMouseEnterBind, passiveEventListenerOptions);
+    this.elementListener.removeEventListener("mouseleave", this.onMouseLeaveBind, passiveEventListenerOptions);
+    this.elementListener.removeEventListener("mousemove", this.onMouseMoveBind, passiveEventListenerOptions);
 
     if (this.gyroscope) {
       window.removeEventListener("deviceorientation", this.onDeviceOrientationBind);
@@ -491,6 +495,31 @@ export default class VanillaTilt {
       }
     });
   }
+}
+
+/**
+ * Checks whether the user's browser supports passive event listeners.
+ * See: https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @returns {boolean}
+ */
+function supportsPassiveEventListeners() {
+  let supportsPassiveEvents;
+
+  if (typeof window !== "undefined") {
+    try {
+      window.addEventListener(
+        "test",
+        null,
+        Object.defineProperty({}, "passive", {
+          get: () => (supportsPassiveEvents = true),
+        })
+      );
+    } finally {
+      supportsPassiveEvents = supportsPassiveEvents || false;
+    }
+  }
+
+  return supportsPassiveEvents;
 }
 
 if (typeof document !== "undefined") {

@@ -3,7 +3,7 @@
   "version": "1.7.2",
   "description": "A smooth 3D tilt javascript library forked from Tilt.js",
   "main": "lib/vanilla-tilt.js",
-  "module_es2015": "lib/vanilla-tilt.es2015.js",
+  "module": "lib/vanilla-tilt.es2015.js",
   "jsnext:main": "lib/vanilla-tilt.es2015.js",
   "distrib": "dist/vanilla-tilt.js",
   "types": "vanilla-tilt.d.ts",
