@@ -415,8 +415,8 @@ export default class VanillaTilt {
    * @param {number} settings.scale - 2 = 200%, 1.5 = 150%, etc..
    * @param {number} settings.speed - Speed of the enter/exit transition
    * @param {boolean} settings.transition - Set a transition on enter/exit
-   * @param {string|null} settings.axis - What axis should be disabled. Can be X or Y
-   * @param {boolean} settings.glare - What axis should be disabled. Can be X or Y
+   * @param {string|null} settings.axis - What axis should be enabled. Can be "x" or "y"
+   * @param {boolean} settings.glare - if it should have a "glare" effect
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
    * @param {boolean} settings.full-page-listening - If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
