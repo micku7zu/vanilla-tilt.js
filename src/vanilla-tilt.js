@@ -347,7 +347,8 @@ export default class VanillaTilt {
       "width": "100%",
       "height": "100%",
       "overflow": "hidden",
-      "pointer-events": "none"
+      "pointer-events": "none",
+      "border-radius": "inherit",
     });
 
     Object.assign(this.glareElement.style, {
