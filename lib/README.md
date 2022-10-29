@@ -31,14 +31,14 @@ If you want to use this library in IE, you need to include a CustomEvent polyfil
     scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
     speed:                  300,    // Speed of the enter/exit transition
     transition:             true,   // Set a transition on enter/exit.
-    axis:                   null,   // What axis should be disabled. Can be X or Y.
+    axis:                   null,   // What axis should be enabled. Can be "x" or "y".
     reset:                  true,   // If the tilt effect has to be reset on exit.
     easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     glare:                  false,  // if it should have a "glare" effect
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
     "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
                                     // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-    "mouse-event-element":  null,   // css-selector or link to HTML-element what will be listen mouse events
+    "mouse-event-element":  null,   // css-selector or link to an HTML-element that will be listening to mouse events
     "full-page-listening":  false,  // If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
     gyroscope:              true,   // Boolean to enable/disable device orientation detection,
     gyroscopeMinAngleX:     -45,    // This is the bottom limit of the device angle on X axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the left border of the element;
@@ -114,6 +114,14 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 - [Corey Austin](https://github.com/lazyhummingbird) (Initial gyroscope position)
 - [Sander Moolin](https://github.com/SaFrMo)
 - [rrroyal](https://github.com/rrroyal) (Whole document mouse events listening)
+
+### Other projects
+
+#### [Quick Cursor: One-Handed mode](https://play.google.com/store/apps/details?id=com.quickcursor) (Android app)
+Play Store link: https://play.google.com/store/apps/details?id=com.quickcursor
+
+### Buy me a beer 🍻
+If you want to thank me for vanilla-tilt.js or Quick Cursor Android app, you can [donate on PayPal](https://www.paypal.me/micku7zu?locale.x=en_US): https://www.paypal.me/micku7zu?locale.x=en_US
 
 ### License
 

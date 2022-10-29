@@ -1,4 +1,4 @@
-// Extended Type definitions for vanilla-tilt 1.7.0
+// Extended Type definitions for vanilla-tilt 1.7.3
 // Project: https://github.com/micku7zu/vanilla-tilt.js
 // Definitions by: Livio Brunner <https://github.com/BrunnerLivio>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -43,7 +43,7 @@ export interface TiltOptions {
    */
   transition?: boolean;
   /**
-   * What axis should be disabled. Can be X or Y.
+   * What axis should be enabled. Can be "x" or "y".
    */
   axis?: null | "x" | "y";
   /**
