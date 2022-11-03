@@ -348,7 +348,7 @@ export default class VanillaTilt {
       "height": "100%",
       "overflow": "hidden",
       "pointer-events": "none",
-      "border-radius": "inherit",
+      "border-radius": "inherit"
     });
 
     Object.assign(this.glareElement.style, {
@@ -359,7 +359,7 @@ export default class VanillaTilt {
       "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
       "transform": "rotate(180deg) translate(-50%, -50%)",
       "transform-origin": "0% 0%",
-      "opacity": "0",
+      "opacity": "0"
     });
 
     this.updateGlareSize();
