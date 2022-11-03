@@ -2,6 +2,8 @@
 
 [![npm version](https://badge.fury.io/js/vanilla-tilt.svg)](https://badge.fury.io/js/vanilla-tilt)
 
+ceva schimbari aici
+
 A smooth 3D tilt javascript library forked from [Tilt.js (jQuery version)](https://github.com/gijsroge/tilt.js).
 
 [View landing page (demos)](https://micku7zu.github.io/vanilla-tilt.js/)
