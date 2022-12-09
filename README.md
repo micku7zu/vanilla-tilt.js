@@ -33,6 +33,7 @@ If you want to use this library in IE, you need to include a CustomEvent polyfil
     transition:             true,   // Set a transition on enter/exit.
     axis:                   null,   // What axis should be enabled. Can be "x" or "y".
     reset:                  true,   // If the tilt effect has to be reset on exit.
+    "reset-to-start":       false,  // Whether the exit reset will go to [0,0] (default) or [startX, startY]
     easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     glare:                  false,  // if it should have a "glare" effect
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
