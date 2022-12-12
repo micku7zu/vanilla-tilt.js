@@ -45,6 +45,9 @@
         <li>
             <a href="https://github.com/rrroyal">rrroyal</a>
         </li>
+        <li>
+            <a href="https://github.com/Pilskalns">Andžs Pilskalns</a>
+        </li>
     </ul>
     <br>
     <h3>Other projects</h3>
@@ -146,6 +149,7 @@
     transition:             true,   // Set a transition on enter/exit.
     axis:                   null,   // What axis should be enabled. Can be "x" or "y"
     reset:                  true,   // If the tilt effect has to be reset on exit.
+    "reset-to-start":       true,   // Whether the exit reset will go to [0,0] (default) or [startX, startY]
     easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     glare:                  false,  // if it should have a "glare" effect
     "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
@@ -270,7 +274,8 @@
         <div class="info">
             <h3>Start tilt position</h3>
             <p>Setting this option will tilt the element at specific degrees at page load.</p>
-            <pre><code class="language-markup">&lt;div data-tilt data-tilt-startX="20" data-tilt-startY="-20"&gt;&lt;/div&gt;</code></pre>
+            <pre><code class="language-markup">&lt;div data-tilt data-tilt-startX="20" data-tilt-startY="-20" data-tilt-reset-to-start="true"&gt;&lt;/div&gt;</code></pre>
+            <p><code class="language-markup">"reset-to-start"</code> - on mouse leave will reset the position to [startX, startY]</p>
         </div>
     </section>
 
@@ -362,6 +367,9 @@ eventBox.addEventListener("tiltChange", function (event) {
                 </li>
                 <li>
                     <a href="https://github.com/rrroyal">rrroyal</a>
+                </li>
+                <li>
+                    <a href="https://github.com/Pilskalns">Andžs Pilskalns</a>
                 </li>
             </ul>
         </div>
