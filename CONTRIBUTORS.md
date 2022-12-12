@@ -5,3 +5,4 @@
 - [Matteo Rigon](https://github.com/matteo-rigon) (Device orientation support)
 - [Corey Austin](https://github.com/lazyhummingbird) (Initial gyroscope position)
 - [rrroyal](https://github.com/rrroyal) (Whole document mouse events listening)
+- [Andžs Pilskalns](https://github.com/Pilskalns) ("reset-to-start" feature)
