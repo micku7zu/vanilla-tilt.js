@@ -1,4 +1,4 @@
-// Extended Type definitions for vanilla-tilt 1.7.3
+// Extended Type definitions for vanilla-tilt 1.8.0
 // Project: https://github.com/micku7zu/vanilla-tilt.js
 // Definitions by: Livio Brunner <https://github.com/BrunnerLivio>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -50,6 +50,10 @@ export interface TiltOptions {
    * If the tilt effect has to be reset on exit.
    */
   reset?: boolean;
+  /**
+   * Whether the exit reset will go to [0,0] (default) or [startX, startY].
+   */
+  "reset-to-start"?: boolean;
   /**
    * Easing on enter/exit.
    */

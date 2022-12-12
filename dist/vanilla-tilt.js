@@ -5,7 +5,7 @@ var VanillaTilt = (function () {
  * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.7.3
+ * Version 1.8.0
  */
 
 class VanillaTilt {
@@ -38,6 +38,7 @@ class VanillaTilt {
     this.settings = this.extendSettings(settings);
 
     this.reverse = this.settings.reverse ? -1 : 1;
+    this.resetToStart = VanillaTilt.isSettingTrue(this.settings["reset-to-start"]);
     this.glare = VanillaTilt.isSettingTrue(this.settings.glare);
     this.glarePrerender = VanillaTilt.isSettingTrue(this.settings["glare-prerender"]);
     this.fullPageListening = VanillaTilt.isSettingTrue(this.settings["full-page-listening"]);
@@ -56,7 +57,11 @@ class VanillaTilt {
 
     this.addEventListeners();
     this.reset();
-    this.updateInitialPosition();
+
+    if (this.resetToStart === false) {
+      this.settings.startX = 0;
+      this.settings.startY = 0;
+    }
   }
 
   static isSettingTrue(setting) {
@@ -213,33 +218,6 @@ class VanillaTilt {
   }
 
   reset() {
-    this.event = {
-      clientX: this.left + this.width / 2,
-      clientY: this.top + this.height / 2
-    };
-
-    if (this.element && this.element.style) {
-      this.element.style.transform = `perspective(${this.settings.perspective}px) ` +
-        `rotateX(0deg) ` +
-        `rotateY(0deg) ` +
-        `scale3d(1, 1, 1)`;
-    }
-
-    this.resetGlare();
-  }
-
-  resetGlare() {
-    if (this.glare) {
-      this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)";
-      this.glareElement.style.opacity = "0";
-    }
-  }
-
-  updateInitialPosition() {
-    if (this.settings.startX === 0 && this.settings.startY === 0) {
-      return;
-    }
-
     this.onMouseEnter();
 
     if (this.fullPageListening) {
@@ -254,12 +232,18 @@ class VanillaTilt {
       };
     }
 
-
     let backupScale = this.settings.scale;
     this.settings.scale = 1;
     this.update();
     this.settings.scale = backupScale;
     this.resetGlare();
+  }
+
+  resetGlare() {
+    if (this.glare) {
+      this.glareElement.style.transform = "rotate(180deg) translate(-50%, -50%)";
+      this.glareElement.style.opacity = "0";
+    }
   }
 
   getValues() {
@@ -351,7 +335,7 @@ class VanillaTilt {
       "height": "100%",
       "overflow": "hidden",
       "pointer-events": "none",
-      "border-radius": "inherit",
+      "border-radius": "inherit"
     });
 
     Object.assign(this.glareElement.style, {
@@ -362,7 +346,7 @@ class VanillaTilt {
       "background-image": `linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)`,
       "transform": "rotate(180deg) translate(-50%, -50%)",
       "transform-origin": "0% 0%",
-      "opacity": "0",
+      "opacity": "0"
     });
 
     this.updateGlareSize();
@@ -426,6 +410,7 @@ class VanillaTilt {
    * @param {boolean} settings.full-page-listening - If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
+   * @param {boolean} settings.reset-to-start - true = On reset event (mouse leave) will return to initial start angle (if startX or startY is set)
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
    * @param {gyroscopeSamples} settings.gyroscopeSamples - How many gyroscope moves to decide the starting position.
@@ -448,6 +433,7 @@ class VanillaTilt {
       "full-page-listening": false,
       "mouse-event-element": null,
       reset: true,
+      "reset-to-start": true,
       gyroscope: true,
       gyroscopeMinAngleX: -45,
       gyroscopeMaxAngleX: 45,
