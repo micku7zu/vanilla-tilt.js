@@ -2,7 +2,7 @@
  * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.7.3
+ * Version 1.8.0
  */
 
 export default class VanillaTilt {
@@ -55,7 +55,7 @@ export default class VanillaTilt {
     this.addEventListeners();
     this.reset();
 
-    if(this.resetToStart === false){
+    if (this.resetToStart === false) {
       this.settings.startX = 0;
       this.settings.startY = 0;
     }
@@ -228,7 +228,6 @@ export default class VanillaTilt {
         clientY: this.top + ((this.settings.startY + this.settings.max) / (2 * this.settings.max) * this.height)
       };
     }
-
 
     let backupScale = this.settings.scale;
     this.settings.scale = 1;
@@ -408,7 +407,7 @@ export default class VanillaTilt {
    * @param {boolean} settings.full-page-listening - If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
-   * @param {boolean} settings.reset-to-start - true = On reset event (mouse leave) will return to initial start angle (startX, startY)
+   * @param {boolean} settings.reset-to-start - true = On reset event (mouse leave) will return to initial start angle (if startX or startY is set)
    * @param {gyroscope} settings.gyroscope - Enable tilting by deviceorientation events
    * @param {gyroscopeSensitivity} settings.gyroscopeSensitivity - Between 0 and 1 - The angle at which max tilt position is reached. 1 = 90deg, 0.5 = 45deg, etc..
    * @param {gyroscopeSamples} settings.gyroscopeSamples - How many gyroscope moves to decide the starting position.
@@ -431,7 +430,7 @@ export default class VanillaTilt {
       "full-page-listening": false,
       "mouse-event-element": null,
       reset: true,
-      "reset-to-start": false,
+      "reset-to-start": true,
       gyroscope: true,
       gyroscopeMinAngleX: -45,
       gyroscopeMaxAngleX: 45,
