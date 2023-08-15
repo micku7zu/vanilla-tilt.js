@@ -381,7 +381,9 @@ export default class VanillaTilt {
     if (this.glare) this.glareElement.style.transition = `opacity ${this.settings.speed}ms ${this.settings.easing}`;
 
     this.transitionTimeout = setTimeout(() => {
-      this.element.style.transition = "";
+      if (this.element) {
+        this.element.style.transition = "";
+      }
       if (this.glare) {
         this.glareElement.style.transition = "";
       }
