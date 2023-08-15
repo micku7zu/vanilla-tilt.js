@@ -2,7 +2,7 @@
  * Created by Sergiu Șandor (micku7zu) on 1/27/2017.
  * Original idea: https://github.com/gijsroge/tilt.js
  * MIT License.
- * Version 1.8.0
+ * Version 1.8.1
  */
 
 export default class VanillaTilt {
@@ -136,7 +136,10 @@ export default class VanillaTilt {
       cancelAnimationFrame(this.updateCall);
     }
 
-    this.reset();
+    this.element.style.willChange = "";
+    this.element.style.transition = "";
+    this.element.style.transform = "";
+    this.resetGlare();
 
     this.removeEventListeners();
     this.element.vanillaTilt = null;

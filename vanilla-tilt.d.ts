@@ -1,4 +1,4 @@
-// Extended Type definitions for vanilla-tilt 1.8.0
+// Extended Type definitions for vanilla-tilt 1.8.1
 // Project: https://github.com/micku7zu/vanilla-tilt.js
 // Definitions by: Livio Brunner <https://github.com/BrunnerLivio>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped

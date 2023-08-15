@@ -1,6 +1,6 @@
 {
   "name": "vanilla-tilt",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A smooth 3D tilt javascript library forked from Tilt.js",
   "main": "lib/vanilla-tilt.js",
   "module_es2015": "lib/vanilla-tilt.es2015.js",
