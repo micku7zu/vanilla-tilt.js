@@ -123,8 +123,9 @@ Original library author: [Gijs Rogé](https://twitter.com/GijsRoge)
 Play Store link: https://play.google.com/store/apps/details?id=com.quickcursor
 
 ### Buy me a beer 🍻
-If you want to thank me for vanilla-tilt.js or Quick Cursor Android app, you can [donate on PayPal](https://www.paypal.me/micku7zu?locale.x=en_US): https://www.paypal.me/micku7zu?locale.x=en_US
-
+If you want to thank me for vanilla-tilt.js or Quick Cursor Android app, you can donate on PayPal: 
+- [Donate through PayPal](https://www.paypal.com/donate/?hosted_button_id=XH38XJ986LQFA): https://www.paypal.com/donate/?hosted_button_id=XH38XJ986LQFA
+- [Send money through PayPal](https://www.paypal.com/paypalme/micku7zu?locale.x=en_US): https://www.paypal.com/paypalme/micku7zu?locale.x=en_US
 ### License
 
 MIT License
