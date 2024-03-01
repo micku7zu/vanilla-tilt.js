@@ -39,6 +39,7 @@ export default class VanillaTilt {
     this.glare = VanillaTilt.isSettingTrue(this.settings.glare);
     this.glarePrerender = VanillaTilt.isSettingTrue(this.settings["glare-prerender"]);
     this.fullPageListening = VanillaTilt.isSettingTrue(this.settings["full-page-listening"]);
+    this.fullPageListeningRotationCenterByPage = VanillaTilt.isSettingTrue(this.settings["full-page-listening-rotation-center-by-page"]);
     this.gyroscope = VanillaTilt.isSettingTrue(this.settings.gyroscope);
     this.gyroscopeSamples = this.settings.gyroscopeSamples;
 
@@ -249,7 +250,7 @@ export default class VanillaTilt {
   getValues() {
     let x, y;
 
-    if (this.fullPageListening) {
+    if (this.fullPageListening && this.fullPageListeningRotationCenterByPage) {
       x = this.event.clientX / this.clientWidth;
       y = this.event.clientY / this.clientHeight;
     } else {
@@ -408,6 +409,7 @@ export default class VanillaTilt {
    * @param {number} settings.max-glare - the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
    * @param {boolean} settings.glare-prerender - false = VanillaTilt creates the glare elements for you, otherwise
    * @param {boolean} settings.full-page-listening - If true, parallax effect will listen to mouse move events on the whole document, not only the selected element
+   * @param {boolean} settings.full-page-listening-rotation-center-by-page - If true, the rotation center will be placed at the page center for full page listening. Only if full-page-listening setting is true.
    * @param {string|object} settings.mouse-event-element - String selector or link to HTML-element what will be listen mouse events
    * @param {boolean} settings.reset - false = If the tilt effect has to be reset on exit
    * @param {boolean} settings.reset-to-start - true = On reset event (mouse leave) will return to initial start angle (if startX or startY is set)
@@ -431,6 +433,7 @@ export default class VanillaTilt {
       "max-glare": 1,
       "glare-prerender": false,
       "full-page-listening": false,
+      "full-page-listening-rotation-center-by-page": true,
       "mouse-event-element": null,
       reset: true,
       "reset-to-start": true,
